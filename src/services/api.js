@@ -1,11 +1,13 @@
-'use strict'
+'use strict';
 const db = require('../models/index.js');
-const Apod = db.apod
-const Rover = db.rover
-
+const Apod = db.apod;
+const Rover = db.rover;
 
 async function apiCallApod() {
-    const response = await fetch("https://api.nasa.gov/planetary/apod?start_date=2023-01-01&api_key=" + process.env.API_KEY);
+    const response = await fetch(
+        'https://api.nasa.gov/planetary/apod?start_date=2023-01-01&api_key=' +
+            process.env.API_KEY
+    );
     const data = await response.json();
     const newList = data.map((apod) => ({
         title: apod.title,
@@ -32,7 +34,10 @@ async function apiCallApod() {
 }
 
 async function apiCallRovers() {
-    const response = await fetch("https://api.nasa.gov/mars-photos/api/v1/rovers/curiosity/photos?sol=1000&page=2&api_key=" + process.env.API_KEY);
+    const response = await fetch(
+        'https://api.nasa.gov/mars-photos/api/v1/rovers/curiosity/photos?sol=1000&page=2&api_key=' +
+            process.env.API_KEY
+    );
     // "https://api.nasa.gov/mars-photos/api/v1/rovers/curiosity/photos?sol=1000&page=1&api_key=" + process.env.API_KEY
     const data = await response.json();
     const newList = data.photos.map((item) => ({
@@ -41,7 +46,7 @@ async function apiCallRovers() {
         earth_date: item.earth_date,
         camera: {
             name: item.camera.name,
-            full_name: item.camera.full_name
+            full_name: item.camera.full_name,
         },
     }));
     const rovers = await Rover.findAll();

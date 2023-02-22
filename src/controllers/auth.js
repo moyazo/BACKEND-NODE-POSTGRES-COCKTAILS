@@ -1,14 +1,17 @@
-const db = require("../models/index.js");
+const db = require('../models/index.js');
 const bcrypt = require('bcrypt');
 const jsonwebtoken = require('jsonwebtoken');
 const saltRounds = 10;
 const getUserByEmail = require('./user.js').getUserByEmail;
 const User = db.user;
 
-
-
+/**
+ * Description
+ * @param {any} {email
+ * @param {any} password}
+ * @returns {any}
+ */
 const signup = async ({ email, password }) => {
-
     const existedUser = await getUserByEmail(email);
 
     if (existedUser) {
@@ -17,18 +20,15 @@ const signup = async ({ email, password }) => {
 
     const salt = await bcrypt.genSalt(saltRounds);
     const hashedPassword = await bcrypt.hash(password, salt);
-    const user = await User.create({ email, password: hashedPassword, salt })
+    const user = await User.create({ email, password: hashedPassword, salt });
     await user.save();
 
     return jsonwebtoken.sign({ email: user.email }, process.env.TOKEN_SECRET, {
-        expiresIn: '24h'
-    })
-
-
-}
+        expiresIn: '24h',
+    });
+};
 
 const login = async ({ email, password }) => {
-
     const user = await getUserByEmail(email);
     console.log(user);
 
@@ -44,10 +44,8 @@ const login = async ({ email, password }) => {
     }
 
     return jsonwebtoken.sign({ email: user.email }, process.env.TOKEN_SECRET, {
-        expiresIn: '24h'
-    })
+        expiresIn: '24h',
+    });
+};
 
-
-}
-
-module.exports = { signup, login }
+module.exports = { signup, login };

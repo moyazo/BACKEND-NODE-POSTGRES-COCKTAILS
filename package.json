@@ -1,28 +1,30 @@
 {
-  "name": "cocktail-api",
-  "version": "1.0.0",
-  "main": "index.js",
-  "repository": "https://github.com/moyazo/BACKEND-NODE-POSTGRES-COCKTAILS.git",
-  "author": "Manuel Moya <manuel.moyavadillo2@gmail.com>",
-  "license": "MIT",
-  "scripts": {
-    "start": "nodemon index.js",
-    "startdb": "docker compose up",
-    "stopdb": "docker compose down"
-  },
-  "dependencies": {
-    "bcrypt": "^5.1.0",
-    "cors": "^2.8.5",
-    "docker": "^1.0.0",
-    "dotenv": "^16.0.3",
-    "express": "^4.18.2",
-    "jsonwebtoken": "^9.0.0",
-    "node-sass": "^8.0.0",
-    "nodemon": "^2.0.20",
-    "path": "^0.12.7",
-    "pg": "^8.9.0",
-    "sequelize": "^6.28.0",
-    "sequelize-cli": "^6.6.0",
-    "uuid": "^9.0.0"
-  }
+    "name": "cocktail-api",
+    "version": "1.0.0",
+    "main": "index.js",
+    "repository": "https://github.com/moyazo/BACKEND-NODE-POSTGRES-COCKTAILS.git",
+    "author": "Manuel Moya <manuel.moyavadillo2@gmail.com>",
+    "license": "MIT",
+    "scripts": {
+        "start": "nodemon index.js",
+        "startdb": "docker compose up",
+        "stopdb": "docker compose down",
+        "prettier": "prettier --write"
+    },
+    "dependencies": {
+        "bcrypt": "^5.1.0",
+        "cors": "^2.8.5",
+        "docker": "^1.0.0",
+        "dotenv": "^16.0.3",
+        "express": "^4.18.2",
+        "jsonwebtoken": "^9.0.0",
+        "node-sass": "^8.0.0",
+        "nodemon": "^2.0.20",
+        "path": "^0.12.7",
+        "pg": "^8.9.0",
+        "prettier": "^2.8.4",
+        "sequelize": "^6.28.0",
+        "sequelize-cli": "^6.6.0",
+        "uuid": "^9.0.0"
+    }
 }

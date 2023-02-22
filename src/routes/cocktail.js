@@ -1,20 +1,21 @@
-const db = require('../models/index.js');
-const Rover = db.rover;
+// const db = require('../models/index.js');
+// const Rover = db.rover;
 const Router = require('express').Router;
-const {
-    getRoverList,
-    getRoverId,
-    updateRover,
-    deleteRover,
-} = require('../controllers/rover.js');
-const routerRover = Router();
+// const {
+//     getRoverList,
+//     getRoverId,
+//     updateRover,
+//     deleteRover,
+// } = require('../controllers/rover.js');
+// const routerRover = Router();
 
 routerRover.get('/', async (req, res) => {
     try {
-        const rovers = await getRoverList();
-        res.status(200).json(rovers);
+        const allCocktails = await getCocktailsList();
+        (!allCocktails && res.status(403).json(`ERROR 403 'allCocktails' NOT FOUND`)) ||
+            res.status(200).json(allCocktails);
     } catch (error) {
-        res.status(500).json(error.message);
+        res.status(500).json(`ERROR 500, ${error.message}`);
     }
 });
 
