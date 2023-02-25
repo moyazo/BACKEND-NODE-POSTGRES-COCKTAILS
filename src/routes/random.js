@@ -13,9 +13,9 @@ const { getRandomCocktail } = require('../controllers/random');
  */
 randomRouter.get('/', async (req, res) => {
     try {
-        const random = await getRandomCocktail();
-        (!random && res.status(403).json(`ERROR 403 'random'  NOT FOUND`)) ||
-            res.status(200).json(random);
+        const Cocktail = await getRandomCocktail();
+        (!Cocktail && res.status(403).json(`ERROR 403 'random'  NOT FOUND`)) ||
+            res.status(200).json(Cocktail);
     } catch (error) {
         res.status(500).json(`ERROR 500, ${error.message}`);
     }

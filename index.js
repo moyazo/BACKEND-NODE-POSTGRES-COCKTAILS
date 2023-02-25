@@ -1,12 +1,8 @@
 const express = require('express');
 const bodyParser = require('body-parser');
-const routerApod = require('./src/routes/apod.js');
-const routerRover = require('./src/routes/rover.js');
-const routerUser = require('./src/routes/user.js');
 const routerAuth = require('./src/routes/auth.js');
-const routerApodsApi = require('./src/routes/syncApi.js');
-const routerApiRovers = require('./src/routes/syncApiRovers.js');
 const randomRouter = require('./src/routes/random.js');
+const routerRandomApi = require('./src/routes/syncRandom');
 const dotenv = require('dotenv');
 const ensureAuthenticated = require('./src/middleware/auth.js');
 const cors = require('cors');
@@ -29,12 +25,8 @@ const startApp = async () => {
     );
     app.use(ensureAuthenticated);
     app.use('/auth', routerAuth);
-    app.use('/users', routerUser);
     app.use('/random', randomRouter);
-    app.use('/apods', routerApod);
-    app.use('/rovers', routerRover);
-    app.use('/sync-api', routerApodsApi);
-    app.use('/sync-apiRovers', routerApiRovers);
+    app.use('/sync-random', routerRandomApi);
 
     try {
         app.listen(port, () => {

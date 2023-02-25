@@ -1,21 +1,21 @@
 'use strict';
 const { Model } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
-    class User extends Model {
+    class Cocktail extends Model {
         /**
          * Helper method for defining associations.
          * This method is not a part of Sequelize lifecycle.
          * The `models/index` file will call this method automatically.
          */
         static associate(models) {
-            User.belongsToMany(models.Cocktail, {
+            Cocktail.belongsToMany(models.User, {
                 through: 'cocktailUser',
-                as: 'userCocktails',
-                foreignKey: 'user_FK',
+                as: 'CocktailUsers',
+                foreignKey: 'cocktail_FK',
             });
         }
     }
-    User.init(
+    Cocktail.init(
         {
             id: {
                 allowNull: false,
@@ -23,20 +23,37 @@ module.exports = (sequelize, DataTypes) => {
                 type: DataTypes.UUID,
                 defaultValue: DataTypes.UUIDV4,
             },
-            email: {
-                type: DataTypes.STRING,
-                unique: true,
+            cocktail_id: {
+                type: DataTypes.INTEGER,
                 allowNull: false,
             },
-            password: {
+            cocktail_name: {
                 type: DataTypes.STRING,
                 allowNull: false,
             },
-            name: {
+            category: {
                 type: DataTypes.STRING,
+                allowNull: false,
             },
-            salt: {
+            isAlcoholic: {
                 type: DataTypes.STRING,
+                allowNull: false,
+            },
+            instructions: {
+                type: DataTypes.STRING,
+                allowNull: false,
+            },
+            image: {
+                type: DataTypes.STRING,
+                allowNull: false,
+            },
+            ingredients: {
+                type: DataTypes.STRING,
+                allowNull: false,
+            },
+            size: {
+                type: DataTypes.STRING,
+                allowNull: false,
             },
             createdAt: {
                 allowNull: false,
@@ -49,8 +66,8 @@ module.exports = (sequelize, DataTypes) => {
         },
         {
             sequelize,
-            modelName: 'User',
+            modelName: 'Cocktail',
         }
     );
-    return User;
+    return Cocktail;
 };

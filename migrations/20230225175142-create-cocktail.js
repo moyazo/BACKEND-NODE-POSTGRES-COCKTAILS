@@ -2,35 +2,44 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
     async up(queryInterface, Sequelize) {
-        await queryInterface.sequelize.query(
-            `CREATE EXTENSION IF NOT EXISTS "uuid-ossp";`
-        );
-        await queryInterface.createTable('rovers', {
+        await queryInterface.createTable('Cocktails', {
             id: {
                 allowNull: false,
                 primaryKey: true,
                 type: Sequelize.UUID,
                 defaultValue: Sequelize.UUIDV4,
             },
-            nasaId: {
+            cocktail_id: {
                 type: Sequelize.INTEGER,
-            },
-            img_src: {
-                type: Sequelize.STRING,
-            },
-            earth_date: {
-                type: Sequelize.STRING,
-            },
-            camera: {
-                type: Sequelize.JSON,
                 allowNull: false,
-                defaultValue: {},
-                get() {
-                    return JSON.parse(this.getDataValue('camera'));
-                },
-                set(value) {
-                    this.setDataValue('camera', JSON.stringify(value));
-                },
+            },
+            cocktail_name: {
+                type: Sequelize.STRING,
+                allowNull: false,
+            },
+            category: {
+                type: Sequelize.STRING,
+                allowNull: false,
+            },
+            isAlcoholic: {
+                type: Sequelize.STRING,
+                allowNull: false,
+            },
+            instructions: {
+                type: Sequelize.STRING,
+                allowNull: false,
+            },
+            image: {
+                type: Sequelize.STRING,
+                allowNull: false,
+            },
+            ingredients: {
+                type: Sequelize.STRING,
+                allowNull: false,
+            },
+            size: {
+                type: Sequelize.STRING,
+                allowNull: false,
             },
             createdAt: {
                 allowNull: false,
@@ -43,6 +52,6 @@ module.exports = {
         });
     },
     async down(queryInterface, Sequelize) {
-        await queryInterface.dropTable('rovers');
+        await queryInterface.dropTable('Cocktails');
     },
 };

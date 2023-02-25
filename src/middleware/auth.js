@@ -1,6 +1,6 @@
 const jsonwebtoken = require('jsonwebtoken');
 const db = require('../models/index.js');
-const User = db.user;
+const User = db.User;
 
 const ensureAuthenticated = async (req, res, next) => {
     if (req.path.includes('/auth')) {

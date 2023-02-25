@@ -1,9 +1,9 @@
-// const db = require('../models');
-// const Rover = db.rover
+const db = require('../models');
+const Cocktail = db.Cocktail
 
 const getRandomCocktail = async () => {
     try {
-        return Random.findAll();
+        return Cocktail.findAll();
     } catch (error) {
         console.log(`ERROR AT BRINGING RANDOM, ${error.message}`);
     }

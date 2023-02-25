@@ -3,7 +3,7 @@ const bcrypt = require('bcrypt');
 const jsonwebtoken = require('jsonwebtoken');
 const saltRounds = 10;
 const getUserByEmail = require('./user.js').getUserByEmail;
-const User = db.user;
+const User = db.User;
 
 /**
  * Description

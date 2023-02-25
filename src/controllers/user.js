@@ -1,7 +1,5 @@
 const db = require('../models');
-const User = db.user;
-const Rover = db.rover;
-const Apod = db.apod;
+const User = db.User;
 
 const getUserId = async (id) => {
     const user = await User.findByPk(id);

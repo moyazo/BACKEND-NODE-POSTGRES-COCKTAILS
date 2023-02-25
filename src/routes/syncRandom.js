@@ -1,10 +1,10 @@
 const Router = require('express').Router;
-const apiCallApod = require('../services/api').apiCallApod;
-const routerApodsApi = Router();
+const apiCallCocktails = require('../services/cocktailApi');
+const routerRandomApi = Router();
 
-routerApodsApi.get('/', async (req, res) => {
+routerRandomApi.get('/', async (req, res) => {
     try {
-        await apiCallApod();
+        await apiCallCocktails();
         res.status(200).json('Data synchronize successfully');
     } catch (error) {
         console.log(error);
@@ -12,4 +12,4 @@ routerApodsApi.get('/', async (req, res) => {
     }
 });
 
-module.exports = routerApodsApi;
+module.exports = routerRandomApi;

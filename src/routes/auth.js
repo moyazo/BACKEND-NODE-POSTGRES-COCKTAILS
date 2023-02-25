@@ -10,7 +10,7 @@ routerAuth.post('/signup', async (req, res) => {
         if (!email || !password) {
             res.status(502).json('incorrect email or password');
         }
-        const token = await signup({ email, password });
+        const token = await signup(req.body);
         res.status(200).json(token);
     } catch (error) {
         res.status(500).json(error.message);
