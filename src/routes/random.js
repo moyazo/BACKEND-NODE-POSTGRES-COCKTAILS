@@ -24,7 +24,7 @@ cocktailRouter.get('/random', async (req, res) => {
         (!Cocktail && res.status(403).json(`ERROR 403 'random'  NOT FOUND`)) ||
             res.status(200).json(Cocktail);
     } catch (error) {
-        res.status(500).json(`ERROR 500, ${error.message}`);
+        res.status(500).json('THIS IS THE ERROR' + error.message);
     }
 });
 
@@ -34,7 +34,7 @@ cocktailRouter.get('/firstLetter', async (req, res) => {
         (!Cocktails && res.status(403).json(`ERROR 403 'list'  NOT FOUND`)) ||
             res.status(200).json(Cocktails);
     } catch (error) {
-        res.status(500).json(`ERROR 500, ${error.message}`);
+        res.status(500).json('THIS IS THE ERROR(500)' + error.message);
     }
 });
 
@@ -42,10 +42,11 @@ cocktailRouter.get('/firstLetterById/:cocktailId', async (req, res) => {
     try {
         const id = req.params.cocktailId;
         const Cocktails = await getCocktailId(id);
-        (!Cocktails && res.status(403).json(`ERROR 403 'list'  NOT FOUND`)) ||
+        (!Cocktails &&
+            res.status(403).json(`ERROR 403 'Cocktail'  NOT FOUND`)) ||
             res.status(200).json(Cocktails);
     } catch (error) {
-        res.status(500).json(`ERROR 500, ${error.message}`);
+        res.status(500).json('THIS IS THE ERROR(500)' + error.message);
     }
 });
 
@@ -53,11 +54,12 @@ cocktailRouter.put('/update/:cocktailId', async (req, res) => {
     try {
         const id = req.params.cocktailId;
         const newData = req.body;
-        const Cocktails = await updateCocktail(id,newData);
-        (!Cocktails && res.status(403).json(`ERROR 403 'list'  NOT FOUND`)) ||
+        const Cocktails = await updateCocktail(id, newData);
+        (!Cocktails &&
+            res.status(403).json(`ERROR 403, can not update Cocktail ${id}`)) ||
             res.status(200).json(Cocktails);
     } catch (error) {
-        res.status(500).json(`ERROR 500, ${error.message}`);
+        res.status(500).json('THIS IS THE ERROR(500)' + error.message);
     }
 });
 
@@ -65,21 +67,23 @@ cocktailRouter.delete('/delete/:cocktailId', async (req, res) => {
     try {
         const id = req.params.cocktailId;
         const Cocktails = await deleteCocktail(id);
-        (!Cocktails && res.status(403).json(`ERROR 403 'list'  NOT FOUND`)) ||
+        (!Cocktails &&
+            res.status(403).json(`ERROR 403 can not delete Cocktail ${id}`)) ||
             res.status(200).json(Cocktails);
     } catch (error) {
-        res.status(500).json(`ERROR 500, ${error.message}`);
+        res.status(500).json('THIS IS THE ERROR(500)' + error.message);
     }
 });
 
 cocktailRouter.post('/create', async (req, res) => {
     try {
-        const newCocktail = req.body
+        const newCocktail = req.body;
         const Cocktails = await createCocktail(newCocktail);
-        (!Cocktails && res.status(403).json(`ERROR 403 'list'  NOT FOUND`)) ||
+        (!Cocktails &&
+            res.status(403).json(`ERROR 403 can not create Cocktail ${id}`)) ||
             res.status(200).json(Cocktails);
     } catch (error) {
-        res.status(500).json(`ERROR 500, ${error.message}`);
+        res.status(500).json('THIS IS THE ERROR(500)' + error.message);
     }
 });
 

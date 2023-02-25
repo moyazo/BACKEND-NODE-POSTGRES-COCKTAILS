@@ -7,16 +7,12 @@ const routerFirstLetterApi = require('./src/routes/syncFirstLetter');
 const dotenv = require('dotenv');
 const ensureAuthenticated = require('./src/middleware/auth.js');
 const cors = require('cors');
-
+const port = process.env.PORT;
+const app = express();
 dotenv.config();
 
 const startApp = async () => {
-    const app = express();
-
     app.use(cors());
-
-    const port = process.env.PORT;
-
     app.use(bodyParser.json());
     app.use(express.json());
     app.use(

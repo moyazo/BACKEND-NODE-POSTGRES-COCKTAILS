@@ -14,39 +14,51 @@ const getCocktailList = async () => {
         const CocktailList = await Cocktail.findAll();
         return CocktailList;
     } catch (error) {
-        console.log(error.message);
+        console.log('THIS IS HT ERROR, ' + error.message);
     }
 };
 
 const getCocktailId = async (id) => {
-    const CocktailId = await Cocktail.findByPk(id);
-    return CocktailId;
+    try {
+        const CocktailId = await Cocktail.findByPk(id);
+        return CocktailId;
+    } catch (error) {
+        console.log('THIS IS HT ERROR, ' + error.message);
+    }
 };
-
-
 
 const createCocktail = async (newCocktail) => {
     try {
-        const exists = await Cocktail.findOne({ where: { cocktail_id: newCocktail.cocktail_id } });
+        const exists = await Cocktail.findOne({
+            where: { cocktail_id: newCocktail.cocktail_id },
+        });
         if (!exists) {
             const createCocktail = await Cocktail.create(newCocktail);
             return createCocktail;
         }
     } catch (error) {
-        console.error(error);
+        console.error('THIS IS HT ERROR, ' + error.message);
     }
 };
 
 const updateCocktail = async (id, data) => {
-    const CocktailUpdate = await Cocktail.update(data, {
-        where: { id },
-    });
-    return CocktailUpdate;
+    try {
+        const CocktailUpdate = await Cocktail.update(data, {
+            where: { id },
+        });
+        return CocktailUpdate;
+    } catch (error) {
+        console.error('THIS IS HT ERROR, ' + error.message);
+    }
 };
 
 const deleteCocktail = async (id) => {
-    await Cocktail.destroy({ where: { id } });
-    return true;
+    try {
+        await Cocktail.destroy({ where: { id } });
+        return true;
+    } catch (error) {
+        console.error('THIS IS HT ERROR, ' + error.message);
+    }
 };
 
 module.exports = {
