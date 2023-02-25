@@ -1,8 +1,9 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const routerAuth = require('./src/routes/auth.js');
-const randomRouter = require('./src/routes/random.js');
+const cocktailRouter = require('./src/routes/random.js');
 const routerRandomApi = require('./src/routes/syncRandom');
+const routerFirstLetterApi = require('./src/routes/syncFirstLetter');
 const dotenv = require('dotenv');
 const ensureAuthenticated = require('./src/middleware/auth.js');
 const cors = require('cors');
@@ -25,8 +26,9 @@ const startApp = async () => {
     );
     app.use(ensureAuthenticated);
     app.use('/auth', routerAuth);
-    app.use('/random', randomRouter);
+    app.use('/cocktails', cocktailRouter);
     app.use('/sync-random', routerRandomApi);
+    app.use('/sync-firstLetter', routerFirstLetterApi);
 
     try {
         app.listen(port, () => {

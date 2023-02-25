@@ -1,10 +1,10 @@
 const Router = require('express').Router;
-const apiCallCocktails = require('../services/cocktailApi');
+const {apiCallRandom} = require('../services/cocktailApi');
 const routerRandomApi = Router();
 
 routerRandomApi.get('/', async (req, res) => {
     try {
-        await apiCallCocktails();
+        await apiCallRandom();
         res.status(200).json('Data synchronize successfully');
     } catch (error) {
         console.log(error);
