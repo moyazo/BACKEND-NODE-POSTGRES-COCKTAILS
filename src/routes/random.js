@@ -27,7 +27,6 @@ cocktailRouter.get('/random', async (req, res) => {
         res.status(500).json('THIS IS THE ERROR' + error.message);
     }
 });
-
 cocktailRouter.get('/firstLetter', async (req, res) => {
     try {
         const Cocktails = await getCocktailList();
@@ -86,5 +85,4 @@ cocktailRouter.post('/create', async (req, res) => {
         res.status(500).json('THIS IS THE ERROR(500)' + error.message);
     }
 });
-
 module.exports = cocktailRouter;

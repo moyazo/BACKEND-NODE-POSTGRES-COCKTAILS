@@ -118,7 +118,8 @@ async function apiCallBySubCategory(category) {
         const newList = data.drinks.map((item) => ({
             cocktail_id: item.idDrink,
             cocktail_name: item.strDrink,
-            image: item.strDrinkThumb
+            image: item.strDrinkThumb,
+            category: category
         }));
         const subCocktails = await subCocktail.findAll();
         const itemsToCreate = [];
