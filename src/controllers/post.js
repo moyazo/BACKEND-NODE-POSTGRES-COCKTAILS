@@ -9,6 +9,16 @@ const createPost = async (data) => {
     }
 };
 
+const getPosts = async (id) => {
+    try {
+        const Posts = await Post.findAll({where:{userId: id}});
+        return Posts;
+    } catch (error) {
+        console.log('THIS IS HT ERROR, ' + error.message);
+    }
+};
+
 module.exports = {
-    createPost
+    createPost,
+    getPosts
 };
