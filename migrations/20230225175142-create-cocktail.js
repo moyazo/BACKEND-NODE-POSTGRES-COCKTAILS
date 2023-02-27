@@ -41,6 +41,15 @@ module.exports = {
                 type: Sequelize.STRING,
                 allowNull: false,
             },
+            category_FK: {
+                allowNull: false,
+                type: Sequelize.UUID,
+                defaultValue: Sequelize.UUIDV4,
+                references: {
+                    model: 'Categories',
+                    key: 'id'
+                }
+            },
             createdAt: {
                 allowNull: false,
                 type: Sequelize.DATE,

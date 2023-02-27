@@ -3,7 +3,8 @@ const db = require('../models/index.js');
 const User = db.User;
 
 const ensureAuthenticated = async (req, res, next) => {
-    req.path.includes('/auth') && next();
+    if(req.path.includes('/auth'))
+        return next();
 
     !req.headers.authorization &&
         res.status(403).json({ message: 'You are not authenticated' });
