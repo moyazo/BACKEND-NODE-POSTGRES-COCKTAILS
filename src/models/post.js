@@ -1,7 +1,7 @@
 'use strict';
 const { Model } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
-    class subCocktail extends Model {
+    class Post extends Model {
         /**
          * Helper method for defining associations.
          * This method is not a part of Sequelize lifecycle.
@@ -11,7 +11,7 @@ module.exports = (sequelize, DataTypes) => {
             // define association here
         }
     }
-    subCocktail.init(
+    Post.init(
         {
             id: {
                 allowNull: false,
@@ -19,27 +19,23 @@ module.exports = (sequelize, DataTypes) => {
                 type: DataTypes.UUID,
                 defaultValue: DataTypes.UUIDV4,
             },
-            cocktail_id: {
-                type: DataTypes.INTEGER,
-                allowNull: false,
-            },
-            cocktail_name: {
-                type: DataTypes.STRING,
-                allowNull: false,
-            },
-            image: {
-                type: DataTypes.STRING,
-                allowNull: false,
-            },
             category: {
                 type: DataTypes.STRING,
                 allowNull: false,
             },
+            image:{
+              type: DataTypes.STRING,
+                allowNull: false,
+            },
+            comments: {
+                type: DataTypes.STRING,
+                allowNull: false,
+            }
         },
         {
             sequelize,
-            modelName: 'subCocktail',
+            modelName: 'Post',
         }
     );
-    return subCocktail;
+    return Post;
 };

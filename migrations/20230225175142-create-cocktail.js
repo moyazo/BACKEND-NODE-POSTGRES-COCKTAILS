@@ -47,8 +47,8 @@ module.exports = {
                 defaultValue: Sequelize.UUIDV4,
                 references: {
                     model: 'Categories',
-                    key: 'id'
-                }
+                    key: 'id',
+                },
             },
             createdAt: {
                 allowNull: false,

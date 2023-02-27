@@ -9,12 +9,15 @@
         "LLAMAR",
         "LLAMAREMOS",
         "LLAMEMOS",
+        "Moya",
         "NUESTRO",
         "ossp",
         "RECIBIREMOS",
         "REDUCIREMOS",
         "RUTA",
         "RUTAS",
+        "startdb",
+        "stopdb",
         "UUIDV"
     ]
 }

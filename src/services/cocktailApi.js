@@ -108,7 +108,6 @@ async function apiCallByFirstLetter() {
     }
 }
 
-
 async function apiCallBySubCategory(category) {
     try {
         const response = await fetch(
@@ -119,7 +118,7 @@ async function apiCallBySubCategory(category) {
             cocktail_id: item.idDrink,
             cocktail_name: item.strDrink,
             image: item.strDrinkThumb,
-            category: category
+            category: category,
         }));
         const subCocktails = await subCocktail.findAll();
         const itemsToCreate = [];
@@ -131,7 +130,8 @@ async function apiCallBySubCategory(category) {
             !existed && itemsToCreate.push(element);
         }
 
-        itemsToCreate.length > 0 && (await subCocktail.bulkCreate(itemsToCreate));
+        itemsToCreate.length > 0 &&
+            (await subCocktail.bulkCreate(itemsToCreate));
     } catch (error) {
         console.log('THIS IS THE ERROR' + error.message);
     }
@@ -140,5 +140,5 @@ async function apiCallBySubCategory(category) {
 module.exports = {
     apiCallRandom,
     apiCallByFirstLetter,
-    apiCallBySubCategory
+    apiCallBySubCategory,
 };

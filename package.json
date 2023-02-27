@@ -9,7 +9,7 @@
         "start": "nodemon index.js",
         "startdb": "docker compose up",
         "stopdb": "docker compose down",
-        "prettier": "prettier --write"
+        "prettier": "prettier --write ."
     },
     "dependencies": {
         "bcrypt": "^5.1.0",
