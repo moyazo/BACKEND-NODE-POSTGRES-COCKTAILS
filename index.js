@@ -5,6 +5,7 @@ const cocktailRouter = require('./src/routes/random.js');
 const routerRandomApi = require('./src/routes/syncRandom');
 const routerFirstLetterApi = require('./src/routes/syncFirstLetter');
 const routerSubCategoryApi = require('./src/routes/syncSubCategory');
+const routerPostFeed = require('./src/routes/post');
 const dotenv = require('dotenv');
 const ensureAuthenticated = require('./src/middleware/auth.js');
 const cors = require('cors');
@@ -26,6 +27,7 @@ const startApp = async () => {
     app.use('/sync-random', routerRandomApi);
     app.use('/sync-firstLetter', routerFirstLetterApi);
     app.use('/sync-subCategory', routerSubCategoryApi);
+    app.use('/feed', routerPostFeed);
 
     try {
         app.listen(port, () => {

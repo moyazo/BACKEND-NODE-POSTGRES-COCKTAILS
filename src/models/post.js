@@ -8,7 +8,7 @@ module.exports = (sequelize, DataTypes) => {
          * The `models/index` file will call this method automatically.
          */
         static associate(models) {
-            // define association here
+            // Post.belongsTo(models.User);
         }
     }
     Post.init(
@@ -23,14 +23,14 @@ module.exports = (sequelize, DataTypes) => {
                 type: DataTypes.STRING,
                 allowNull: false,
             },
-            image:{
-              type: DataTypes.STRING,
+            image: {
+                type: DataTypes.STRING,
                 allowNull: false,
             },
             comments: {
                 type: DataTypes.STRING,
                 allowNull: false,
-            }
+            },
         },
         {
             sequelize,
