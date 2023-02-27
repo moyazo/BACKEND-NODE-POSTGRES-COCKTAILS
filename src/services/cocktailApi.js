@@ -1,5 +1,6 @@
 const db = require('../models/index.js');
 const Cocktail = db.Cocktail;
+const subCocktail = db.subCocktail;
 async function apiCallRandom() {
     try {
         const response = await fetch(
@@ -107,7 +108,36 @@ async function apiCallByFirstLetter() {
     }
 }
 
+
+async function apiCallBySubCategory(category) {
+    try {
+        const response = await fetch(
+            `https://www.thecocktaildb.com/api/json/v1/1/filter.php?c=${category}`
+        );
+        const data = await response.json();
+        const newList = data.drinks.map((item) => ({
+            cocktail_id: item.idDrink,
+            cocktail_name: item.strDrink,
+            image: item.strDrinkThumb
+        }));
+        const subCocktails = await subCocktail.findAll();
+        const itemsToCreate = [];
+
+        for (let element of newList) {
+            const existed = subCocktails.find(
+                (subCocktail) => subCocktail.cocktail_id == element.cocktail_id
+            );
+            !existed && itemsToCreate.push(element);
+        }
+
+        itemsToCreate.length > 0 && (await subCocktail.bulkCreate(itemsToCreate));
+    } catch (error) {
+        console.log('THIS IS THE ERROR' + error.message);
+    }
+}
+
 module.exports = {
     apiCallRandom,
     apiCallByFirstLetter,
+    apiCallBySubCategory
 };
