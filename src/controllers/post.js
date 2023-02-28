@@ -18,7 +18,17 @@ const getPosts = async (id) => {
     }
 };
 
+const deletePost = async (id) => {
+    try {
+        const destroyed = await Post.destroy({where:{post_id: id}});
+        return destroyed;
+    } catch (error) {
+        console.log('THIS IS HT ERROR, ' + error.message);
+    }
+};
+
 module.exports = {
     createPost,
-    getPosts
+    getPosts,
+    deletePost
 };

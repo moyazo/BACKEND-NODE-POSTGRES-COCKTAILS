@@ -1,6 +1,5 @@
 const Router = require('express').Router;
-const { apiCallByFirstLetter } = require('../services/cocktailApi');
-const { createPost,getPosts } = require('../controllers/post')
+const { createPost,getPosts,deletePost } = require('../controllers/post')
 const routerPostFeed = Router();
 
 routerPostFeed.post('/createPost', async (req, res) => { // CREAR POSTS
@@ -26,6 +25,20 @@ routerPostFeed.get('/:userId', async (req, res) => { // POSTS DE USER
             res.status(500).json('ERROR 403, posts do not exist');
         
             res.status(500).json(Posts);
+    } catch (error) {
+        console.log(error);
+        res.status(500).json('No new documents found' + error.message);
+    }
+});
+
+routerPostFeed.delete('/:postId', async (req, res) => { // POSTS DE USER
+    try {
+        const postId = req.params.postId;
+        const deleted = await deletePost(postId);
+        if(!Posts)
+            res.status(500).json('ERROR 403, can not delete post');
+        
+            res.status(500).json(deleted);
     } catch (error) {
         console.log(error);
         res.status(500).json('No new documents found' + error.message);
