@@ -11,7 +11,7 @@ const createPost = async (data) => {
 
 const getPosts = async (id) => {
     try {
-        const Posts = await Post.findAll({where:{userId: id}});
+        const Posts = await Post.findAll({where:{user_FK: id}});
         return Posts;
     } catch (error) {
         console.log('THIS IS HT ERROR, ' + error.message);

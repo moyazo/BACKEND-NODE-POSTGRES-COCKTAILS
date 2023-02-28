@@ -3,22 +3,22 @@ const { apiCallByFirstLetter } = require('../services/cocktailApi');
 const { createPost,getPosts } = require('../controllers/post')
 const routerPostFeed = Router();
 
-routerPostFeed.post('/createPost', async (req, res) => {
+routerPostFeed.post('/createPost', async (req, res) => { // CREAR POSTS
     try {
         const newData = req.body;
         console.log(newData)
         const Post = await createPost(newData);
         if(!Post)
-            res.status(500).json('ERROR 403, can not create new post');
-        
-            res.status(500).json(Post);
+            res.status(403).json('ERROR 403, can not create new post');
+        // const Posts = await getPosts(user_id);
+            res.status(200).json(Post);
     } catch (error) {
         console.log(error);
         res.status(500).json('No new documents found' + error.message);
     }
 });
 
-routerPostFeed.get('/:userId', async (req, res) => {
+routerPostFeed.get('/:userId', async (req, res) => { // POSTS DE USER
     try {
         const user_id = req.params.userId;
         const Posts = await getPosts(user_id);

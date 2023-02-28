@@ -21,6 +21,15 @@ module.exports = {
                 type: Sequelize.STRING,
                 allowNull: false,
             },
+            user_FK: {
+                allowNull: false,
+                type: Sequelize.UUID,
+                defaultValue: Sequelize.UUIDV4,
+                references: {
+                    model: 'Users',
+                    key: 'id',
+                },
+            },
             createdAt: {
                 allowNull: false,
                 type: Sequelize.DATE,

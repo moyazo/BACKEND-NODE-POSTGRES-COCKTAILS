@@ -9,6 +9,7 @@ const {
     updateCocktail,
     deleteCocktail,
     createCocktail,
+    getCocktailLetter
 } = require('../controllers/cocktail');
 
 /**
@@ -25,6 +26,18 @@ cocktailRouter.get('/random', async (req, res) => {
             res.status(200).json(Cocktail);
     } catch (error) {
         res.status(500).json('THIS IS THE ERROR' + error.message);
+    }
+});
+
+cocktailRouter.get('/:firstletter', async (req, res) => {
+    try {
+        const letter = req.params.firstletter;
+        const Cocktails = await getCocktailLetter(letter);
+        (!Cocktails &&
+            res.status(403).json(`ERROR 403 'Cocktails'  NOT FOUND`)) ||
+            res.status(200).json(Cocktails);
+    } catch (error) {
+        res.status(500).json('THIS IS THE ERROR(500)' + error.message);
     }
 });
 cocktailRouter.get('/firstLetter', async (req, res) => {
