@@ -29,7 +29,9 @@ const getCocktailId = async (id) => {
 
 const getCocktailLetter = async (letter) => {
     try {
-        const CocktailId = await Cocktail.findAll({where:{cocktail_name: `^${letter}`}});
+        const CocktailId = await Cocktail.findAll({
+            where: { cocktail_name: `^${letter}` },
+        });
         return CocktailId;
     } catch (error) {
         console.log('THIS IS HT ERROR, ' + error.message);
@@ -77,5 +79,5 @@ module.exports = {
     createCocktail,
     updateCocktail,
     deleteCocktail,
-    getCocktailLetter
+    getCocktailLetter,
 };

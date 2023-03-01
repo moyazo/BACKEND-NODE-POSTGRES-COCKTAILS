@@ -9,7 +9,7 @@ const {
     updateCocktail,
     deleteCocktail,
     createCocktail,
-    getCocktailLetter
+    getCocktailLetter,
 } = require('../controllers/cocktail');
 
 /**
