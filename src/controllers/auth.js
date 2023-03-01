@@ -11,7 +11,7 @@ const User = db.User;
  * @param {any} password}
  * @returns {any}
  */
-const signup = async ({ email, password }) => {
+const signup = async ({ email, password, name }) => {
     const existedUser = await getUserByEmail(email);
 
     if (existedUser) {
@@ -20,7 +20,7 @@ const signup = async ({ email, password }) => {
 
     const salt = await bcrypt.genSalt(saltRounds);
     const hashedPassword = await bcrypt.hash(password, salt);
-    const user = await User.create({ email, password: hashedPassword, salt });
+    const user = await User.create({ email, password: hashedPassword, name, salt });
     await user.save();
 
     return jsonwebtoken.sign({ email: user.email }, process.env.TOKEN_SECRET, {

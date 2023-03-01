@@ -4,7 +4,7 @@ const bodyParser = require('body-parser');
 const routerAuth = require('./src/routes/auth.js');
 const cocktailRouter = require('./src/routes/random.js');
 const routerRandomApi = require('./src/routes/syncRandom');
-
+const routerUser = require('./src/routes/user');
 const routerFirstLetterApi = require('./src/routes/syncFirstLetter');
 const routerSubCategoryApi = require('./src/routes/syncSubCategory');
 const routerPostFeed = require('./src/routes/post');
@@ -26,6 +26,7 @@ const startApp = async () => {
     );
     app.use(ensureAuthenticated);
     app.use('/auth', routerAuth);
+    app.use('/user', routerUser);
     app.use('/cocktails', cocktailRouter);
     app.use('/sync-random', routerRandomApi);
     app.use('/sync-firstLetter', routerFirstLetterApi);
