@@ -29,7 +29,6 @@ const startApp = async () => {
     app.use('/cocktails', cocktailRouter);
     app.use('/sync-random', routerRandomApi);
     app.use('/sync-firstLetter', routerFirstLetterApi);
-
     app.use('/sync-subCategory', routerSubCategoryApi);
     app.use('/feed', routerPostFeed);
 

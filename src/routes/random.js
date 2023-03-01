@@ -1,9 +1,7 @@
-// const db = require("../models/index.js");
-// const Rover = db.rover;
 const Router = require('express').Router;
+const { apiCallRandom } = require('../services/cocktailApi');
 const cocktailRouter = Router();
 const {
-    getRandomCocktail,
     getCocktailList,
     getCocktailId,
     updateCocktail,
@@ -21,11 +19,14 @@ const {
  */
 cocktailRouter.get('/random', async (req, res) => {
     try {
-        const Cocktail = await getRandomCocktail();
-        (!Cocktail && res.status(403).json(`ERROR 403 'random'  NOT FOUND`)) ||
-            res.status(200).json(Cocktail);
+        const random = await apiCallRandom();
+        if(!random)
+            res.status(403).json(`ERROR 403 'random'  NOT FOUND`);
+            
+        res.status(200).json(random);
     } catch (error) {
-        res.status(500).json('THIS IS THE ERROR' + error.message);
+        console.log(error);
+        res.status(500).json('No new documents found' + error.message);
     }
 });
 

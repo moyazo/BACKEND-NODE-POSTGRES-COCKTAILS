@@ -13,38 +13,20 @@ async function apiCallRandom() {
             cocktail_name: item.strDrink,
             category: item.strCategory,
             isAlcoholic: item.strAlcoholic,
-            instructions: item.strInstructions,
-            strInstructions: item.strInstructions,
+            description: item.strInstructions,
+            instrucctions: {
+                de: item.strInstructionsDE,
+                it:item.strInstructionsIT
+            },
             image: item.strDrinkThumb,
-            ingredients:
-                item.strIngredient1 +
-                ',' +
-                item.strIngredient2 +
-                ',' +
-                item.strIngredient3 +
-                ',' +
-                item.strIngredient4 +
-                ',' +
-                item.strIngredient5 +
-                ',' +
-                item.strIngredient6 +
-                ',' +
-                item.strIngredient7,
-            size:
-                item.strMeasure1 +
-                ',' +
-                item.strMeasure2 +
-                ',' +
-                item.strMeasure3 +
-                ',' +
-                item.strMeasure4 +
-                ',' +
-                item.strMeasure5 +
-                ',' +
-                item.strMeasure6,
+            ingredients:{
+                one: item.strIngredient1,
+                two: item.strIngredient2,
+                three: item.strIngredient3,
+                four: item.strIngredient4,
+            }
         }));
-        await Cocktail.destroy({ where: {} });
-        await Cocktail.create(ourRandom[0]);
+        return ourRandom;
     } catch (error) {
         console.log('THIS IS THE ERROR' + error.message);
     }
