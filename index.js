@@ -1,17 +1,17 @@
-import express from 'express';
-import bodyParser from 'body-parser';
+const express = require('express');
+const bodyParser = require('body-parser');
 
-import routerAuth from './src/routes/auth.js';
-import cocktailRouter from './src/routes/random.js';
-import routerRandomApi from './src/routes/syncRandom';
+const routerAuth = require('./src/routes/auth.js');
+const cocktailRouter = require('./src/routes/random.js');
+const routerRandomApi = require('./src/routes/syncRandom');
 
-import routerFirstLetterApi from './src/routes/syncFirstLetter';
-import routerSubCategoryApi from './src/routes/syncSubCategory';
-import routerPostFeed from './src/routes/post';
-import dotenv from 'dotenv';
+const routerFirstLetterApi = require('./src/routes/syncFirstLetter');
+const routerSubCategoryApi = require('./src/routes/syncSubCategory');
+const routerPostFeed = require('./src/routes/post');
+const dotenv = require('dotenv');
 
-import ensureAuthenticated from './src/middleware/auth.js';
-import cors from 'cors';
+const ensureAuthenticated = require('./src/middleware/auth.js');
+const cors = require('cors');
 const app = express();
 dotenv.config();
 const startApp = async () => {
