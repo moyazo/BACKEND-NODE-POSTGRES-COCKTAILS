@@ -1,4 +1,5 @@
 const Router = require('express').Router;
+const jsonwebtoken = require('jsonwebtoken');
 const updateUserFavListRover =
     require('../controllers/user.js').updateUserFavListRover;
 const updateUserFavListApod =
@@ -89,6 +90,21 @@ routerUser.get('/profile', async (req, res) => {
         };
         res.status(200).json(user);
         console.log(user);
+    } catch (error) {
+        console.log(error);
+        res.status(500).json(error.message);
+    }
+});
+
+routerUser.get('/id', async (req, res) => {
+    try {
+        const payload = jsonwebtoken.decode(req.body.token, process.env.TOKEN_SECRET);
+        const data = await getUserByEmail(payload.email);
+        const userId = {
+            id: data.id,
+        };
+        res.status(200).json(userId);
+        
     } catch (error) {
         console.log(error);
         res.status(500).json(error.message);
