@@ -2,11 +2,10 @@ const express = require('express');
 const bodyParser = require('body-parser');
 
 const routerAuth = require('./src/routes/auth.js');
-const cocktailRouter = require('./src/routes/random.js');
-const routerRandomApi = require('./src/routes/syncRandom');
+const cocktailRouter = require('./src/routes/cocktail.js');
 const routerUser = require('./src/routes/user');
 const routerFirstLetterApi = require('./src/routes/syncFirstLetter');
-const routerSubCategoryApi = require('./src/routes/syncSubCategory');
+const routerSubCategoryApi = require('./src/routes/subCategory');
 const routerFeed = require('./src/routes/post');
 const dotenv = require('dotenv');
 
@@ -28,7 +27,6 @@ const startApp = async () => {
     app.use('/auth', routerAuth);
     app.use('/user', routerUser);
     app.use('/cocktails', cocktailRouter);
-    app.use('/sync-random', routerRandomApi);
     app.use('/sync-firstLetter', routerFirstLetterApi);
     app.use('/sync-subCategory', routerSubCategoryApi);
     app.use('/feed', routerFeed);

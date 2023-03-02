@@ -1,9 +1,9 @@
 const Router = require('express').Router;
 const jsonwebtoken = require('jsonwebtoken');
-const updateUserFavListRover =
-    require('../controllers/user.js').updateUserFavListRover;
-const updateUserFavListApod =
-    require('../controllers/user.js').updateUserFavListApod;
+// const updateUserFavListRover =
+//     require('../controllers/user.js').updateUserFavListRover;
+// const updateUserFavListApod =
+//     require('../controllers/user.js').updateUserFavListApod;
 const getUserByEmail = require('../controllers/user.js').getUserByEmail;
 const routerUser = Router();
 const db = require('../models');
