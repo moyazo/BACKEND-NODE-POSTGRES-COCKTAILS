@@ -3,7 +3,7 @@ const { apiCallBySubCategory } = require('../services/cocktailApi');
 const { getCocktailList } = require('../controllers/subCocktail');
 const routerSubCategoryApi = Router();
 
-routerSubCategoryApi.post('/:category', async (req, res) => {
+routerSubCategoryApi.get('/:category', async (req, res) => {
     try {
         await apiCallBySubCategory(req.params.category);
         const cocktails = await getCocktailList(req.params.category);
