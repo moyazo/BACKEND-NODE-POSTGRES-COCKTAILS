@@ -20,9 +20,8 @@ const {
 cocktailRouter.get('/random', async (req, res) => {
     try {
         const random = await apiCallRandom();
-        if(!random)
-            res.status(403).json(`ERROR 403 'random'  NOT FOUND`);
-            
+        if (!random) res.status(403).json(`ERROR 403 'random'  NOT FOUND`);
+
         res.status(200).json(random);
     } catch (error) {
         console.log(error);

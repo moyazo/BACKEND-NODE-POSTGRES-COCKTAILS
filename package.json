@@ -6,10 +6,11 @@
     "author": "Manuel Moya <manuel.moyavadillo2@gmail.com>",
     "license": "MIT",
     "scripts": {
-        "start": "nodemon index.js",
+        "start": "yarn prettier --write && sequelize-cli db:migrate && nodemon index.js  .",
         "startdb": "docker compose up",
         "stopdb": "docker compose down",
-        "prettier": "prettier --write ."
+        "prettier": "prettier --write .",
+        "prueba": "yarn prettier --write && sequelize-cli db:migrate && nodemon index.js  ."
     },
     "dependencies": {
         "bcrypt": "^5.1.0",

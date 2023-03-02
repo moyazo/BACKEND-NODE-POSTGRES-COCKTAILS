@@ -98,14 +98,16 @@ routerUser.get('/profile', async (req, res) => {
 
 routerUser.get('/id/:token', async (req, res) => {
     try {
-        const payload = jsonwebtoken.decode(req.params.token, process.env.TOKEN_SECRET);
-        console.log(req.params.token)
+        const payload = jsonwebtoken.decode(
+            req.params.token,
+            process.env.TOKEN_SECRET
+        );
+        console.log(req.params.token);
         const data = await getUserByEmail(payload.email);
         const userId = {
             id: data.id,
         };
         res.status(200).json(userId);
-        
     } catch (error) {
         console.log(error);
         res.status(500).json(error.message);

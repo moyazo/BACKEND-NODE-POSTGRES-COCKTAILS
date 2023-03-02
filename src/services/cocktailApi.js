@@ -16,7 +16,7 @@ async function apiCallRandom() {
             description: item.strInstructions,
             instrucctions: {
                 de: item.strInstructionsDE,
-                it: item.strInstructionsIT
+                it: item.strInstructionsIT,
             },
             image: item.strDrinkThumb,
             ingredients: {
@@ -24,7 +24,7 @@ async function apiCallRandom() {
                 two: item.strIngredient2,
                 three: item.strIngredient3,
                 four: item.strIngredient4,
-            }
+            },
         }));
         return ourRandom;
     } catch (error) {
