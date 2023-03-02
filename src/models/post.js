@@ -17,18 +17,26 @@ module.exports = (sequelize, DataTypes) => {
                 type: DataTypes.UUID,
                 defaultValue: DataTypes.UUIDV4,
             },
+            title: {
+                type: DataTypes.STRING,
+            },
             category: {
                 type: DataTypes.STRING,
-                allowNull: false,
             },
             image: {
                 type: DataTypes.STRING,
-                allowNull: false,
             },
-            comments: {
+            comment: {
                 type: DataTypes.STRING,
-                allowNull: false,
             },
+            user_FK: {
+                type: DataTypes.UUID,
+                defaultValue: DataTypes.UUIDV4,
+                references: {
+                    model: 'Users',
+                    key: 'id',
+                },
+            }
         },
         {
             sequelize,

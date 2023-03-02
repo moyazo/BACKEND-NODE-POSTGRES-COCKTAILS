@@ -5,6 +5,7 @@ const routerPostFeed = Router();
 routerPostFeed.post('/createPost', async (req, res) => {
     // CREAR POSTS
     try {
+        console.log(req.body);
         const newData = req.body;
         console.log(newData);
         const Post = await createPost(newData);

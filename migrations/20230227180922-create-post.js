@@ -9,20 +9,19 @@ module.exports = {
                 type: Sequelize.UUID,
                 defaultValue: Sequelize.UUIDV4,
             },
+            title: {
+                type: Sequelize.STRING,
+            },
             category: {
                 type: Sequelize.STRING,
-                allowNull: false,
             },
             image: {
                 type: Sequelize.STRING,
-                allowNull: false,
             },
-            comments: {
+            comment: {
                 type: Sequelize.STRING,
-                allowNull: false,
             },
             user_FK: {
-                allowNull: false,
                 type: Sequelize.UUID,
                 defaultValue: Sequelize.UUIDV4,
                 references: {
