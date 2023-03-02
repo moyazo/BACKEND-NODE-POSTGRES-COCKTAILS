@@ -23,7 +23,6 @@ module.exports = {
             },
             user_FK: {
                 type: Sequelize.UUID,
-                defaultValue: Sequelize.UUIDV4,
                 references: {
                     model: 'Users',
                     key: 'id',
