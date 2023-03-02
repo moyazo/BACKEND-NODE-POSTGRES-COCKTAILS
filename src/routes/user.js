@@ -96,9 +96,9 @@ routerUser.get('/profile', async (req, res) => {
     }
 });
 
-routerUser.get('/id', async (req, res) => {
+routerUser.get('/id/:token', async (req, res) => {
     try {
-        const payload = jsonwebtoken.decode(req.body.token, process.env.TOKEN_SECRET);
+        const payload = jsonwebtoken.decode(req.params.token, process.env.TOKEN_SECRET);
         const data = await getUserByEmail(payload.email);
         const userId = {
             id: data.id,
