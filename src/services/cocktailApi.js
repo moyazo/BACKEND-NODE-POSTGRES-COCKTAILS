@@ -99,7 +99,7 @@ async function apiCallByCategory() {
         );
         const data = await response.json();
         const newList = data.drinks.map((item) => ({
-            category: item.strCategory,
+            category: item.strCategory.replace('/', '_'),
         }));
         const categories = await Category.findAll();
         const itemsToCreate = [];
@@ -138,7 +138,6 @@ async function apiCallBySubCategory(category) {
             );
             !existed && itemsToCreate.push(element);
         }
-
         itemsToCreate.length > 0 &&
             (await subCocktail.bulkCreate(itemsToCreate));
     } catch (error) {
