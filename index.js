@@ -5,6 +5,7 @@ const routerAuth = require('./src/routes/auth.js');
 const cocktailRouter = require('./src/routes/cocktail.js');
 const routerUser = require('./src/routes/user');
 const routerFirstLetterApi = require('./src/routes/syncFirstLetter');
+const routerCategoryApi = require('./src/routes/category');
 const routerSubCategoryApi = require('./src/routes/subCategory');
 const routerFeed = require('./src/routes/post');
 const dotenv = require('dotenv');
@@ -29,6 +30,7 @@ const startApp = async () => {
     app.use('/cocktails', cocktailRouter);
     app.use('/sync-firstLetter', routerFirstLetterApi);
     app.use('/sync-subCategory', routerSubCategoryApi);
+    app.use('/sync-categories', routerCategoryApi);
     app.use('/feed', routerFeed);
 
     try {
