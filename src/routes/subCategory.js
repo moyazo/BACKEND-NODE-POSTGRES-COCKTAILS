@@ -8,7 +8,8 @@ const routerSubCategoryApi = Router();
 
 routerSubCategoryApi.get('/:category', async (req, res) => {
     try {
-        await apiCallBySubCategory(req.params.category);
+        const category = req.params.category;
+        await apiCallBySubCategory(category);
         const cocktails = await getCocktailList(req.params.category);
         if (!cocktails) res.status(403).json(`ERROR 403 'cocktails' NOT FOUND`);
         res.status(200).json(cocktails);

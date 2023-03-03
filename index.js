@@ -25,12 +25,10 @@ const startApp = async () => {
         })
     );
     app.use(ensureAuthenticated);
+    app.use('/categories', routerCategoryApi);
     app.use('/auth', routerAuth);
     app.use('/user', routerUser);
     app.use('/cocktails', cocktailRouter);
-    app.use('/sync-firstLetter', routerFirstLetterApi);
-    app.use('/sync-subCategory', routerSubCategoryApi);
-    app.use('/sync-categories', routerCategoryApi);
     app.use('/feed', routerFeed);
 
     try {
