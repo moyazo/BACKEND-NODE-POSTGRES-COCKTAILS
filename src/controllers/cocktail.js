@@ -1,5 +1,6 @@
 const db = require('../models');
 const Cocktail = db.Cocktail;
+const Post = db.Post;
 
 const getRandomCocktail = async () => {
     try {
@@ -65,7 +66,7 @@ const updateCocktail = async (id, data) => {
 
 const deleteCocktail = async (id) => {
     try {
-        await Cocktail.destroy({ where: { id } });
+        await Post.destroy({ where: { id } });
         return true;
     } catch (error) {
         console.error('THIS IS HT ERROR, ' + error.message);
