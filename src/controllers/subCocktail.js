@@ -24,5 +24,5 @@ const getSubCocktailById = async (id) => {
 
 module.exports = {
     getCocktailList,
-    getSubCocktailById
+    getSubCocktailById,
 };

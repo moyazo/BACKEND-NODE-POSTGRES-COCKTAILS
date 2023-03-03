@@ -29,7 +29,7 @@ routerFeed.get('/posts/:userId', async (req, res) => {
         const user_id = req.params.userId;
         const Posts = await getPosts(user_id);
         if (!Posts) res.status(403).json('USER DO NOT HAVE POSTS');
-        res.status(500).json(Posts);
+        res.status(200).json(Posts);
     } catch (error) {
         console.log(error);
         res.status(500).json('No new documents found' + error.message);
