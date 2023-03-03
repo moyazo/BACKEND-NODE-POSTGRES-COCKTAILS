@@ -1,5 +1,6 @@
 const db = require('../models');
 const Cocktail = db.Cocktail;
+const subCocktail = db.subCocktail;
 const Post = db.Post;
 
 const getRandomCocktail = async () => {
@@ -9,33 +10,11 @@ const getRandomCocktail = async () => {
         console.log(`ERROR AT BRINGING RANDOM, ${error.message}`);
     }
 };
-
-const getCocktailList = async () => {
+const getByCategory = async (category) => {
     try {
-        const CocktailList = await Cocktail.findAll();
-        return CocktailList;
+        return subCocktail.findAll({ where: { category: category } });
     } catch (error) {
-        console.log('THIS IS HT ERROR, ' + error.message);
-    }
-};
-
-const getCocktailId = async (id) => {
-    try {
-        const CocktailId = await Cocktail.findByPk(id);
-        return CocktailId;
-    } catch (error) {
-        console.log('THIS IS HT ERROR, ' + error.message);
-    }
-};
-
-const getCocktailLetter = async (letter) => {
-    try {
-        const CocktailId = await Cocktail.findAll({
-            where: { cocktail_name: `^${letter}` },
-        });
-        return CocktailId;
-    } catch (error) {
-        console.log('THIS IS HT ERROR, ' + error.message);
+        console.log(`ERROR AT BRINGING subCocktails, ${error.message}`);
     }
 };
 
@@ -75,10 +54,8 @@ const deleteCocktail = async (id) => {
 
 module.exports = {
     getRandomCocktail,
-    getCocktailList,
-    getCocktailId,
     createCocktail,
     updateCocktail,
     deleteCocktail,
-    getCocktailLetter,
+    getByCategory,
 };

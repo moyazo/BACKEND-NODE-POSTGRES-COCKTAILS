@@ -117,7 +117,7 @@ async function apiCallByCategory() {
             await Category.bulkCreate(itemsToCreate);
         }
 
-        await apiCallBySubCategory()
+        await apiCallBySubCategory();
     } catch (error) {
         console.log('THIS IS THE ERROR' + error.message);
     }
@@ -126,8 +126,8 @@ async function apiCallByCategory() {
 async function apiCallBySubCategory() {
     try {
         const categoriesDb = await Category.findAll();
-        let categories = []
-        categoriesDb.forEach(element => {
+        let categories = [];
+        categoriesDb.forEach((element) => {
             categories.push(element.dataValues.category);
         });
         categories.forEach(async (category) => {
@@ -139,7 +139,7 @@ async function apiCallBySubCategory() {
                 cocktail_id: item.idDrink,
                 cocktail_name: item.strDrink,
                 image: item.strDrinkThumb,
-                category: category.replace('/','').replace(/\s+/g, '','')
+                category: category.replace('/', '').replace(/\s+/g, '', ''),
             }));
             const subCocktails = await subCocktail.findAll();
             const itemsToCreate = [];

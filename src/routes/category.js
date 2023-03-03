@@ -1,7 +1,5 @@
 const Router = require('express').Router;
-const {
-    apiCallByCategory,
-} = require('../services/cocktailApi');
+const { apiCallByCategory } = require('../services/cocktailApi');
 const routerCategoryApi = Router();
 
 routerCategoryApi.get('/sync', async (req, res) => {

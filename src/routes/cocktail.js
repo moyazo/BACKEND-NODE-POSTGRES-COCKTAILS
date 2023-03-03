@@ -2,12 +2,10 @@ const Router = require('express').Router;
 const { apiCallRandom } = require('../services/cocktailApi');
 const cocktailRouter = Router();
 const {
-    getCocktailList,
-    getCocktailId,
     updateCocktail,
     deleteCocktail,
     createCocktail,
-    getCocktailLetter,
+    getByCategory,
 } = require('../controllers/cocktail');
 
 /**
@@ -29,7 +27,18 @@ cocktailRouter.get('/random', async (req, res) => {
     }
 });
 
-
+cocktailRouter.get('/:category', async (req, res) => {
+    try {
+        const category = req.params.category;
+        const subCocktails = await getByCategory(category);
+        if (!subCocktails)
+            res.status(403).json(`ERROR 403 'random'  NOT FOUND`);
+        res.status(200).json(subCocktails);
+    } catch (error) {
+        console.log(error);
+        res.status(500).json('No new documents found' + error.message);
+    }
+});
 
 cocktailRouter.put('/:cocktailId', async (req, res) => {
     try {
