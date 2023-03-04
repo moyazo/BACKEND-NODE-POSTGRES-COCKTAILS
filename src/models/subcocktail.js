@@ -8,7 +8,10 @@ module.exports = (sequelize, DataTypes) => {
          * The `models/index` file will call this method automatically.
          */
         static associate(models) {
-            subCocktail.hasOne(models.Category);
+            subCocktail.belongsTo(models.Category, {
+                foreignKey: 'id',
+                as: 'category',
+            });
         }
     }
     subCocktail.init(
@@ -18,8 +21,6 @@ module.exports = (sequelize, DataTypes) => {
                 primaryKey: true,
                 type: DataTypes.UUID,
                 defaultValue: DataTypes.UUIDV4,
-                onDelete: 'CASCADE',
-                onUpdate: 'CASCADE',
             },
             cocktail_id: {
                 type: DataTypes.INTEGER,
@@ -33,14 +34,15 @@ module.exports = (sequelize, DataTypes) => {
                 type: DataTypes.STRING,
                 allowNull: false,
             },
-            category_FK: {
+            sub_cocktail_category_FK: {
                 allowNull: false,
                 type: DataTypes.UUID,
-                defaultValue: DataTypes.UUIDV4,
                 references: {
                     model: 'Categories',
                     key: 'id',
                 },
+                onDelete: 'CASCADE',
+                onUpdate: 'CASCADE',
             },
             createdAt: {
                 allowNull: false,

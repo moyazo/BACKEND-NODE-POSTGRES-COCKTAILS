@@ -14,7 +14,7 @@ module.exports = {
             title: {
                 type: Sequelize.STRING,
             },
-            category: {
+            postCategory: {
                 type: Sequelize.STRING,
             },
             image: {
@@ -29,6 +29,8 @@ module.exports = {
                     model: 'Users',
                     key: 'id',
                 },
+                onDelete: 'CASCADE',
+                onUpdate: 'CASCADE',
             },
             category_FK: {
                 allowNull: false,
@@ -37,6 +39,8 @@ module.exports = {
                     model: 'Categories',
                     key: 'id',
                 },
+                onDelete: 'CASCADE',
+                onUpdate: 'CASCADE',
             },
             createdAt: {
                 allowNull: false,

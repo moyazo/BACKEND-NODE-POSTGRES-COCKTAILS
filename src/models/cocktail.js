@@ -13,7 +13,10 @@ module.exports = (sequelize, DataTypes) => {
             //     as: 'CocktailUsers',
             //     foreignKey: 'cocktail_FK',
             // });
-            Cocktail.hasOne(models.Category);
+            Cocktail.hasOne(models.Category, {
+                foreignKey: 'id',
+                as: 'category',
+            });
         }
     }
     Cocktail.init(
@@ -23,8 +26,6 @@ module.exports = (sequelize, DataTypes) => {
                 primaryKey: true,
                 type: DataTypes.UUID,
                 defaultValue: DataTypes.UUIDV4,
-                onDelete: 'CASCADE',
-                onUpdate: 'CASCADE',
             },
             cocktail_id: {
                 type: DataTypes.INTEGER,
@@ -54,14 +55,15 @@ module.exports = (sequelize, DataTypes) => {
                 type: DataTypes.STRING,
                 allowNull: false,
             },
-            category_FK: {
+            cocktail_category_FK: {
                 allowNull: false,
                 type: DataTypes.UUID,
-                defaultValue: DataTypes.UUIDV4,
                 references: {
                     model: 'Categories',
                     key: 'id',
                 },
+                onDelete: 'CASCADE',
+                onUpdate: 'CASCADE',
             },
             createdAt: {
                 allowNull: false,

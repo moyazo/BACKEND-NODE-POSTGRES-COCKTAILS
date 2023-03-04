@@ -54,11 +54,12 @@ async function apiCallByCategory() {
             category: item.strCategory,
         }));
         const categories = await Category.findAll();
+        console.log(categories);
         const itemsToCreate = [];
 
         for (let element of newList) {
             const existed = categories.find(
-                (category) => category.cocktail_id === element.cocktail_id
+                (category) => category.category === element.category
             );
             if (!existed) {
                 itemsToCreate.push(element);
@@ -71,7 +72,7 @@ async function apiCallByCategory() {
 
         await apiCallBySubCategory();
     } catch (error) {
-        console.log('THIS IS THE ERROR' + error.message);
+        console.log('THIS IS THE ERROR: ' + error.message);
     }
 }
 
@@ -84,11 +85,10 @@ async function apiCallByCategory() {
 async function apiCallBySubCategory() {
     try {
         const categoriesDb = await Category.findAll();
-        let categories = [];
-        categoriesDb.forEach((element) => {
-            categories.push(element.dataValues.category);
-        });
-        categories.forEach(async (category) => {
+        const subCocktails = await subCocktail.findAll();
+
+        for (const categoryDb of categoriesDb) {
+            const category = categoryDb.dataValues.category;
             const response = await fetch(
                 `https://www.thecocktaildb.com/api/json/v1/1/filter.php?c=${category}`
             );
@@ -97,11 +97,11 @@ async function apiCallBySubCategory() {
                 cocktail_id: item.idDrink,
                 cocktail_name: item.strDrink,
                 image: item.strDrinkThumb,
-                category_FK: category.id,
+                sub_cocktail_category_FK: categoryDb.dataValues.id,
             }));
-            const subCocktails = await subCocktail.findAll();
-            const itemsToCreate = [];
+            console.log('hi' + categoryDb.dataValues.id);
 
+            const itemsToCreate = [];
             for (let element of newList) {
                 const existed = subCocktails.find(
                     (subCocktail) =>
@@ -115,7 +115,7 @@ async function apiCallBySubCategory() {
             if (itemsToCreate.length > 0) {
                 await subCocktail.bulkCreate(itemsToCreate);
             }
-        });
+        }
     } catch (error) {
         console.log('THIS IS THE ERROR' + error.message);
     }

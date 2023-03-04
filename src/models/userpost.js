@@ -26,6 +26,8 @@ module.exports = (sequelize, DataTypes) => {
                     model: 'Users',
                     key: 'id',
                 },
+                onDelete: 'CASCADE',
+                onUpdate: 'CASCADE',
             },
             post_FK: {
                 allowNull: false,
@@ -34,6 +36,8 @@ module.exports = (sequelize, DataTypes) => {
                     model: 'Posts',
                     key: 'id',
                 },
+                onDelete: 'CASCADE',
+                onUpdate: 'CASCADE',
             },
             createdAt: {
                 allowNull: false,

@@ -9,10 +9,10 @@ module.exports = (sequelize, DataTypes) => {
          */
         static associate(models) {
             Category.hasMany(models.Cocktail, {
-                foreignKey: 'category_FK',
+                foreignKey: 'cocktail_category_FK',
             });
             Category.hasMany(models.subCocktail, {
-                foreignKey: 'category_FK',
+                foreignKey: 'sub_cocktail_category_FK',
             });
             Category.hasMany(models.Post, {
                 foreignKey: 'category_FK',
@@ -26,8 +26,6 @@ module.exports = (sequelize, DataTypes) => {
                 primaryKey: true,
                 type: DataTypes.UUID,
                 defaultValue: DataTypes.UUIDV4,
-                onDelete: 'CASCADE',
-                onUpdate: 'CASCADE',
             },
             category: {
                 type: DataTypes.STRING,

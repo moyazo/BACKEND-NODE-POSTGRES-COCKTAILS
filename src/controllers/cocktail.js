@@ -11,7 +11,9 @@ const Post = db.Post;
  */
 const getByCategory = async (idCategory) => {
     try {
-        return subCocktail.findAll({ where: { category_FK: idCategory } });
+        return subCocktail.findAll({
+            where: { sub_cocktail_category_FK: idCategory },
+        });
     } catch (error) {
         console.log(`ERROR AT BRINGING subCocktails, ${error.message}`);
     }
