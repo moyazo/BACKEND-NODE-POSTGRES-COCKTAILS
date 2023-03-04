@@ -43,14 +43,12 @@ const signup = async ({ email, password, name }) => {
  */
 const login = async ({ email, password }) => {
     const user = await getUserByEmail(email);
-    console.log(user);
 
     if (!user) {
         throw new Error('User does not exist');
     }
 
     const match = await bcrypt.compare(password, user.password);
-    // console.log(match)
 
     if (!match) {
         throw new Error('Invalid password');
