@@ -4,6 +4,7 @@ const {
     getPosts,
     deletePost,
     getAllPosts,
+    getPost
 } = require('../controllers/post');
 const routerFeed = Router();
 
@@ -30,6 +31,19 @@ routerFeed.get('/posts/:userId', async (req, res) => {
         const Posts = await getPosts(user_id);
         if (!Posts) res.status(403).json('USER DO NOT HAVE POSTS');
         res.status(200).json(Posts);
+    } catch (error) {
+        console.log(error);
+        res.status(500).json('No new documents found' + error.message);
+    }
+});
+routerFeed.get('/:postId', async (req, res) => {
+    // POSTS DE USER
+    try {
+        if (!req.params.postId) res.status(403).json('postId empty');
+        const postId = req.params.postId;
+        const Post = await getPost(postId);
+        if (!Post) res.status(403).json('USER DO NOT HAVE POSTS');
+        res.status(200).json(Post);
     } catch (error) {
         console.log(error);
         res.status(500).json('No new documents found' + error.message);

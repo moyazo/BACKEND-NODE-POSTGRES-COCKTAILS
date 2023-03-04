@@ -17,6 +17,14 @@ const getPosts = async (id) => {
         console.log('THIS IS THE ERROR, ' + error.message);
     }
 };
+const getPost = async (id) => {
+    try {
+        const Post = await Post.findAll({ where: { id: id } });
+        return Post;
+    } catch (error) {
+        console.log('THIS IS THE ERROR, ' + error.message);
+    }
+};
 const getAllPosts = async () => {
     try {
         const Posts = await Post.findAll();
@@ -40,4 +48,5 @@ module.exports = {
     getPosts,
     deletePost,
     getAllPosts,
+    getPost
 };

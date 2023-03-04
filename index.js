@@ -27,9 +27,9 @@ const startApp = async () => {
     app.use(ensureAuthenticated);
     app.use('/categories', routerCategoryApi);
     app.use('/auth', routerAuth);
-    app.use('/user', routerUser);
+    app.use('/users', routerUser);
     app.use('/cocktails', cocktailRouter);
-    app.use('/feed', routerFeed);
+    app.use('/feeds', routerFeed);
 
     try {
         app.listen(port, () => {
