@@ -8,10 +8,10 @@ module.exports = (sequelize, DataTypes) => {
          * The `models/index` file will call this method automatically.
          */
         static associate(models) {
-            User.hasMany(models.Post, {
-                    through: 'postUsers',
-                    as: 'UserPosts',
-                    foreignKey: 'user_FK',
+            User.belongsToMany(models.Post, {
+                through: 'postUsers',
+                as: 'UserPosts',
+                foreignKey: 'user_FK',
             });
         }
     }
@@ -23,7 +23,7 @@ module.exports = (sequelize, DataTypes) => {
                 type: DataTypes.UUID,
                 defaultValue: DataTypes.UUIDV4,
                 onDelete: 'CASCADE',
-                onUpdate: 'CASCADE'
+                onUpdate: 'CASCADE',
             },
             email: {
                 type: DataTypes.STRING,

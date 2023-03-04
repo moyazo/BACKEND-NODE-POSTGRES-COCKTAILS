@@ -9,7 +9,7 @@ module.exports = {
                 type: Sequelize.UUID,
                 defaultValue: Sequelize.UUIDV4,
                 onDelete: 'CASCADE',
-                onUpdate: 'CASCADE'
+                onUpdate: 'CASCADE',
             },
             title: {
                 type: Sequelize.STRING,
@@ -36,7 +36,7 @@ module.exports = {
                 references: {
                     model: 'Categories',
                     key: 'id',
-                }
+                },
             },
             createdAt: {
                 allowNull: false,
@@ -45,7 +45,7 @@ module.exports = {
             updatedAt: {
                 allowNull: false,
                 type: Sequelize.DATE,
-            }
+            },
         });
     },
     async down(queryInterface, Sequelize) {

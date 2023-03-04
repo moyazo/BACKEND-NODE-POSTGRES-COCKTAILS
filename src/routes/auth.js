@@ -13,7 +13,7 @@ const routerAuth = Router();
 routerAuth.post('/signup', async (req, res) => {
     try {
         const { email, password, name } = req.body;
-        if (!email || !password || !name){
+        if (!email || !password || !name) {
             res.status(502).json('incorrect email or password');
         }
         const token = await signup(req.body);

@@ -19,7 +19,7 @@ module.exports = (sequelize, DataTypes) => {
                 type: DataTypes.UUID,
                 defaultValue: DataTypes.UUIDV4,
                 onDelete: 'CASCADE',
-                onUpdate: 'CASCADE'
+                onUpdate: 'CASCADE',
             },
             cocktail_id: {
                 type: DataTypes.INTEGER,
@@ -40,7 +40,7 @@ module.exports = (sequelize, DataTypes) => {
                 references: {
                     model: 'Categories',
                     key: 'id',
-                }
+                },
             },
             createdAt: {
                 allowNull: false,
@@ -49,7 +49,7 @@ module.exports = (sequelize, DataTypes) => {
             updatedAt: {
                 allowNull: false,
                 type: DataTypes.DATE,
-            }
+            },
         },
         {
             sequelize,

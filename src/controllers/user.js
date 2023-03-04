@@ -6,7 +6,6 @@ const getUserId = async (id) => {
     return user;
 };
 
-
 /**
  * *GET USER BY EMAIL*
  * *This function is called at users route. Get a user by email from our DB*

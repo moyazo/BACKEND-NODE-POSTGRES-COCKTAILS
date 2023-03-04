@@ -81,10 +81,10 @@ cocktailRouter.delete('/:cocktailId', async (req, res) => {
     try {
         const id = req.params.cocktailId;
         const isDeleted = await deleteCocktail(id);
-        if(!isDeleted){
-            res.status(403).json(`ERROR 403 can not delete Cocktail ${id}`)
+        if (!isDeleted) {
+            res.status(403).json(`ERROR 403 can not delete Cocktail ${id}`);
         }
-            res.status(200).json(Cocktails);
+        res.status(200).json(Cocktails);
     } catch (error) {
         res.status(500).json('THIS IS THE ERROR(500)' + error.message);
     }
@@ -101,10 +101,10 @@ cocktailRouter.post('/', async (req, res) => {
     try {
         const newCocktail = req.body;
         const Cocktail = await createCocktail(newCocktail);
-        if(!Cocktail){
+        if (!Cocktail) {
             res.status(403).json(`ERROR 403 can not create Cocktail ${id}`);
         }
-            res.status(200).json(Cocktail);
+        res.status(200).json(Cocktail);
     } catch (error) {
         res.status(500).json('THIS IS THE ERROR(500)' + error.message);
     }

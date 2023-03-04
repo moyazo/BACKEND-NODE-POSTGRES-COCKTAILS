@@ -9,11 +9,11 @@ module.exports = (sequelize, DataTypes) => {
          */
         static associate(models) {
             Post.belongsToMany(models.User, {
-                    through: 'postUsers',
-                    as: 'UserPosts',
-                    foreignKey: 'post_FK',
-                });
-                Post.hasOne(models.Category);
+                through: 'postUsers',
+                as: 'UserPosts',
+                foreignKey: 'post_FK',
+            });
+            Post.hasOne(models.Category);
         }
     }
     Post.init(
@@ -24,7 +24,7 @@ module.exports = (sequelize, DataTypes) => {
                 type: DataTypes.UUID,
                 defaultValue: DataTypes.UUIDV4,
                 onDelete: 'CASCADE',
-                onUpdate: 'CASCADE'
+                onUpdate: 'CASCADE',
             },
             title: {
                 type: DataTypes.STRING,
@@ -51,7 +51,7 @@ module.exports = (sequelize, DataTypes) => {
                 references: {
                     model: 'Categories',
                     key: 'id',
-                }
+                },
             },
             createdAt: {
                 allowNull: false,
@@ -60,7 +60,7 @@ module.exports = (sequelize, DataTypes) => {
             updatedAt: {
                 allowNull: false,
                 type: DataTypes.DATE,
-            }
+            },
         },
         {
             sequelize,

@@ -22,7 +22,7 @@ routerFeed.post('/', async (req, res) => {
         if (!req.body) res.status(403).json('BODY EMPTY');
         const newData = req.body;
         const Post = await createPost(newData);
-        if (!Post){
+        if (!Post) {
             res.status(403).json('ERROR 403, can not create new post');
         }
         res.status(200).json(Post);
@@ -44,12 +44,12 @@ routerFeed.put('/:postId', async (req, res) => {
     try {
         if (!req.params.postId) res.status(403).json('postId empty');
         const postId = req.params.postId;
-        if (!req.body){
+        if (!req.body) {
             res.status(403).json('BODY EMPTY');
         }
         const newData = req.body;
         const Post = await updatePost(postId, newData);
-        if (!Post){
+        if (!Post) {
             res.status(403).json('ERROR 403, can not create new post');
         }
         res.status(200).json(Post);
@@ -131,7 +131,7 @@ routerFeed.delete('/:postId', async (req, res) => {
     try {
         const postId = req.params.postId;
         const deleted = await deletePost(postId);
-        if (!Posts){
+        if (!Posts) {
             res.status(500).json('ERROR 403, can not delete post');
         }
         res.status(200).json(deleted);

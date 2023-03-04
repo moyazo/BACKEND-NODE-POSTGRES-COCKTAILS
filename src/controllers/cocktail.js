@@ -69,7 +69,6 @@ const deleteCocktail = async (id) => {
 };
 
 module.exports = {
-    getRandomCocktail,
     createCocktail,
     updateCocktail,
     deleteCocktail,

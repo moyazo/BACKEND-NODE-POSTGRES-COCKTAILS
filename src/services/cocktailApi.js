@@ -39,7 +39,6 @@ async function apiCallRandom() {
     }
 }
 
-
 /**
  * *apiCallByCategory*
  * *This function call to our api to get all type of categories to save them in our DB. It just synchronize the data*
