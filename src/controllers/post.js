@@ -8,6 +8,15 @@ const createPost = async (data) => {
         console.log('THIS IS THE ERROR, ' + error.message);
     }
 };
+const updatePost = async (id, data) => {
+    try {
+        return Post.update(data, {
+            where: { id },
+        });
+    } catch (error) {
+        console.log('THIS IS THE ERROR, ' + error.message);
+    }
+};
 
 const getPosts = async (id) => {
     try {
@@ -48,4 +57,5 @@ module.exports = {
     deletePost,
     getAllPosts,
     getPost,
+    updatePost,
 };

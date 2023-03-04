@@ -5,6 +5,7 @@ const {
     deletePost,
     getAllPosts,
     getPost,
+    updatePost,
 } = require('../controllers/post');
 const routerFeed = Router();
 
@@ -14,6 +15,22 @@ routerFeed.post('/', async (req, res) => {
         if (!req.body) res.status(403).json('BODY EMPTY');
         const newData = req.body;
         const Post = await createPost(newData);
+        if (!Post) res.status(403).json('ERROR 403, can not create new post');
+        // const Posts = await getPosts(user_id);
+        res.status(200).json(Post);
+    } catch (error) {
+        console.log(error);
+        res.status(500).json('No new documents found' + error.message);
+    }
+});
+routerFeed.put('/:postId', async (req, res) => {
+    // CREATE POSTS
+    try {
+        if (!req.params.postId) res.status(403).json('postId empty');
+        const postId = req.params.postId;
+        if (!req.body) res.status(403).json('BODY EMPTY');
+        const newData = req.body;
+        const Post = await updatePost(postId, newData);
         if (!Post) res.status(403).json('ERROR 403, can not create new post');
         // const Posts = await getPosts(user_id);
         res.status(200).json(Post);

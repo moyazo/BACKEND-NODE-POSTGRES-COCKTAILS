@@ -4,21 +4,21 @@ const uuid = require('uuid');
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
     async up(queryInterface, Sequelize) {
-        await queryInterface.bulkInsert(
-            'Posts',
-            [
-                {
-                    id: uuid.v4(),
-                    title: 'John Doe',
-                    category: 'Cocktail',
-                    image: 'test',
-                    comment: 'this is a comment',
-                    createdAt: new Date(),
-                    updatedAt: new Date(),
-                },
-            ],
-            {}
-        );
+        const postToCreate = [];
+        for (var i = 0; i < 40; i++) {
+            postToCreate.push({
+                id: uuid.v4(),
+                title: faker.name.first(),
+                email: faker.internet.email(),
+                phone: faker.phone.phoneNumber(),
+                ip: faker.internet.ip(),
+                address: faker.address.streetAddress(),
+                city: faker.address.cityName(),
+                createdAt: new Date(),
+                updatedAt: new Date(),
+            });
+        }
+        await queryInterface.bulkInsert('Posts', postToCreate, {});
     },
 
     async down(queryInterface, Sequelize) {
