@@ -6,10 +6,12 @@ const getUserByEmail = require('./user.js').getUserByEmail;
 const User = db.User;
 
 /**
- * Description
- * @param {any} {email
- * @param {any} password}
- * @returns {any}
+ * *SIGN UP*
+ * *This function is called at auth route. Save a new User in our DB*
+ * @param {String} email
+ * @param {String} password
+ * @param {String} name
+ * @returns {String}
  */
 const signup = async ({ email, password, name }) => {
     const existedUser = await getUserByEmail(email);
@@ -32,7 +34,13 @@ const signup = async ({ email, password, name }) => {
         expiresIn: '24h',
     });
 };
-
+/**
+ * *SIGN IN*
+ * *This function is called at auth route. Sign in User from our DB*
+ * @param {String} email
+ * @param {String} password
+ * @returns {String}
+ */
 const login = async ({ email, password }) => {
     const user = await getUserByEmail(email);
     console.log(user);
