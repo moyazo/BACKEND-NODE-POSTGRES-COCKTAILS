@@ -1,6 +1,5 @@
 'use strict';
 const uuid = require('uuid');
-const faker = require('faker');
 const db = require('../src/models/index.js');
 const Category = db.Category;
 /** @type {import('sequelize-cli').Migration} */
@@ -28,10 +27,10 @@ module.exports = {
         for (var i = 0; i < 11; i++) {
             postToCreate.push({
                 id: uuid.v4(),
-                title: faker.name.firstName(),
+                title: 'POST TEST' + (i + 1),
                 category: categoriesToCreate[i],
                 image: images[i],
-                comment: faker.lorem.paragraph(),
+                comment: 'comment test',
                 createdAt: new Date(),
                 updatedAt: new Date(),
             });

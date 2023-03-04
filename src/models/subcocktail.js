@@ -31,10 +31,16 @@ module.exports = (sequelize, DataTypes) => {
                 type: DataTypes.STRING,
                 allowNull: false,
             },
-            category: {
-                type: DataTypes.STRING,
+            category_FK: {
                 allowNull: false,
-            },
+                type: DataTypes.UUID,
+                defaultValue: DataTypes.UUIDV4,
+                references: {
+                    model: 'Categories',
+                    key: 'id',
+                },
+            }
+
         },
         {
             sequelize,

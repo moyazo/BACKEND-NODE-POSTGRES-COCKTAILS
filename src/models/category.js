@@ -11,6 +11,9 @@ module.exports = (sequelize, DataTypes) => {
             Category.hasMany(models.Cocktail, {
                 foreignKey: 'category_FK',
             });
+            Category.hasMany(models.subCocktail, {
+                foreignKey: 'category_FK',
+            });
         }
     }
     Category.init(
