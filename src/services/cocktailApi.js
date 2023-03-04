@@ -92,6 +92,11 @@ async function apiCallRandom() {
 //     }
 // }
 
+/**
+ * *apiCallByCategory*
+ * *This function call to our api to get all type of categories to save them in our DB. It just synchronize the data*
+ * @returns {any}
+ */
 async function apiCallByCategory() {
     try {
         const response = await fetch(
@@ -123,6 +128,12 @@ async function apiCallByCategory() {
     }
 }
 
+/**
+ * *apiCallBySubCategory*
+ * *This function call to our CATEGORIES table from the DB and each category have a list of cocktails that are save in our DB*
+ * *thanks to our api, this cocktails are save with the id of each category*
+ * @returns {any}
+ */
 async function apiCallBySubCategory() {
     try {
         const categoriesDb = await Category.findAll();

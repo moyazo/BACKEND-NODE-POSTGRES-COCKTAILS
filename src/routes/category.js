@@ -7,6 +7,14 @@ const {
 } = require('../controllers/subCocktail');
 const routerCategoryApi = Router();
 
+/**
+ * *SYNC ENDPOINT*
+ * *This endpoint calls to our api in order to save the data in our DB*
+ * *ENDPOINT* 'localhost:8000/categories/sync'
+ * @param {Request} req
+ * @param {Response} res
+ * @returns {String}
+ */
 routerCategoryApi.get('/sync', async (req, res) => {
     try {
         await apiCallByCategory();
@@ -16,6 +24,15 @@ routerCategoryApi.get('/sync', async (req, res) => {
         res.status(500).json('No new documents found' + error.message);
     }
 });
+
+/**
+ * *All CATEGORIES ENDPOINT*
+ * *This endpoint calls to our DB and returns all the categories*
+ * *ENDPOINT* 'localhost:8000/categories'
+ * @param {Request} req
+ * @param {Response} res
+ * @returns {JSON}
+ */
 routerCategoryApi.get('/', async (req, res) => {
     try {
         const categories = await getCategories();
