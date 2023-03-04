@@ -6,8 +6,6 @@ const jsonwebtoken = require('jsonwebtoken');
 //     require('../controllers/user.js').updateUserFavListApod;
 const getUserByEmail = require('../controllers/user.js').getUserByEmail;
 const routerUser = Router();
-const db = require('../models');
-const User = db.user;
 
 // routerUser.post('/addFavoritesRover/:roverId', async (req, res) => {
 //     try {
@@ -79,6 +77,14 @@ const User = db.user;
 //     }
 // });
 
+/**
+ * *PROFILE ENDPOINT*
+ * *This endpoint calls to our DB in order to get data from one user to show it at the profile section of the front-end*
+ * *ENDPOINT* 'localhost:8000/users/profile'
+ * @param {Request} req
+ * @param {Response} res
+ * @returns {JSON}
+ */
 routerUser.get('/profile', async (req, res) => {
     try {
         const data = await getUserByEmail(req.user.email);
@@ -89,13 +95,19 @@ routerUser.get('/profile', async (req, res) => {
             name: data.name,
         };
         res.status(200).json(user);
-        console.log(user);
     } catch (error) {
         console.log(error);
         res.status(500).json(error.message);
     }
 });
-
+/**
+ * *ID USER ENDPOINT*
+ * *This endpoint calls to our DB in order to get the id from one user to call POST FEEDS ENDPOINT to post a cocktail depending on the user id given*
+ * *ENDPOINT* 'localhost:8000/users/profile'
+ * @param {Request} req
+ * @param {Response} res
+ * @returns {JSON}
+ */
 routerUser.get('/id/:token', async (req, res) => {
     try {
         const payload = jsonwebtoken.decode(

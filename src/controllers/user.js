@@ -6,6 +6,13 @@ const getUserId = async (id) => {
     return user;
 };
 
+
+/**
+ * *GET USER BY EMAIL*
+ * *This function is called at users route. Get a user by email from our DB*
+ * @param {String} email
+ * @returns {User}
+ */
 const getUserByEmail = async (email) => {
     try {
         const user = await User.findOne({ where: { email: email } });
