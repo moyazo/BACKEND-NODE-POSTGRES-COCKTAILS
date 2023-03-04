@@ -8,11 +8,12 @@ module.exports = (sequelize, DataTypes) => {
          * The `models/index` file will call this method automatically.
          */
         static associate(models) {
-            Cocktail.belongsToMany(models.User, {
-                through: 'cocktailUser',
-                as: 'CocktailUsers',
-                foreignKey: 'cocktail_FK',
-            });
+            // Cocktail.belongsToMany(models.User, {
+            //     through: 'cocktailUser',
+            //     as: 'CocktailUsers',
+            //     foreignKey: 'cocktail_FK',
+            // });
+            Cocktail.hasOne(models.Category);
         }
     }
     Cocktail.init(
@@ -22,16 +23,14 @@ module.exports = (sequelize, DataTypes) => {
                 primaryKey: true,
                 type: DataTypes.UUID,
                 defaultValue: DataTypes.UUIDV4,
+                onDelete: 'CASCADE',
+                onUpdate: 'CASCADE'
             },
             cocktail_id: {
                 type: DataTypes.INTEGER,
                 allowNull: false,
             },
             cocktail_name: {
-                type: DataTypes.STRING,
-                allowNull: false,
-            },
-            category: {
                 type: DataTypes.STRING,
                 allowNull: false,
             },
@@ -55,6 +54,15 @@ module.exports = (sequelize, DataTypes) => {
                 type: DataTypes.STRING,
                 allowNull: false,
             },
+            category_FK: {
+                allowNull: false,
+                type: DataTypes.UUID,
+                defaultValue: DataTypes.UUIDV4,
+                references: {
+                    model: 'Categories',
+                    key: 'id',
+                }
+            },
             createdAt: {
                 allowNull: false,
                 type: DataTypes.DATE,
@@ -62,7 +70,7 @@ module.exports = (sequelize, DataTypes) => {
             updatedAt: {
                 allowNull: false,
                 type: DataTypes.DATE,
-            },
+            }
         },
         {
             sequelize,

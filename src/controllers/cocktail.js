@@ -12,7 +12,7 @@ const getRandomCocktail = async () => {
 };
 const getByCategory = async (category) => {
     try {
-        return subCocktail.findAll({ where: { category: category } });
+        return subCocktail.findAll({ where: { category_FK: category } });
     } catch (error) {
         console.log(`ERROR AT BRINGING subCocktails, ${error.message}`);
     }

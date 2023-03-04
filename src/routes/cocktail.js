@@ -27,9 +27,9 @@ cocktailRouter.get('/random', async (req, res) => {
     }
 });
 
-cocktailRouter.get('/:category', async (req, res) => {
+cocktailRouter.get('/:idCategory', async (req, res) => {
     try {
-        const category = req.params.category;
+        const category = req.params.idCategory;
         const subCocktails = await getByCategory(category);
         if (!subCocktails)
             res.status(403).json(`ERROR 403 'random'  NOT FOUND`);

@@ -14,6 +14,9 @@ module.exports = (sequelize, DataTypes) => {
             Category.hasMany(models.subCocktail, {
                 foreignKey: 'category_FK',
             });
+            Category.hasMany(models.Post, {
+                foreignKey: 'category_FK',
+            });
         }
     }
     Category.init(
@@ -23,11 +26,21 @@ module.exports = (sequelize, DataTypes) => {
                 primaryKey: true,
                 type: DataTypes.UUID,
                 defaultValue: DataTypes.UUIDV4,
+                onDelete: 'CASCADE',
+                onUpdate: 'CASCADE'
             },
             category: {
                 type: DataTypes.STRING,
                 allowNull: false,
             },
+            createdAt: {
+                allowNull: false,
+                type: DataTypes.DATE,
+            },
+            updatedAt: {
+                allowNull: false,
+                type: DataTypes.DATE,
+            }
         },
         {
             sequelize,

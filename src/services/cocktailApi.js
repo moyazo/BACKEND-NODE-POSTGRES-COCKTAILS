@@ -139,7 +139,7 @@ async function apiCallBySubCategory() {
                 cocktail_id: item.idDrink,
                 cocktail_name: item.strDrink,
                 image: item.strDrinkThumb,
-                category: category.replace('/', '').replace(/\s+/g, '', ''),
+                category_FK: category.id,
             }));
             const subCocktails = await subCocktail.findAll();
             const itemsToCreate = [];

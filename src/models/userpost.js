@@ -1,44 +1,39 @@
 'use strict';
 const { Model } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
-    class User extends Model {
+    class userPost extends Model {
         /**
          * Helper method for defining associations.
          * This method is not a part of Sequelize lifecycle.
          * The `models/index` file will call this method automatically.
          */
         static associate(models) {
-            User.hasMany(models.Post, {
-                    through: 'postUsers',
-                    as: 'UserPosts',
-                    foreignKey: 'user_FK',
-            });
+            // define association here
         }
     }
-    User.init(
+    userPost.init(
         {
             id: {
                 allowNull: false,
                 primaryKey: true,
                 type: DataTypes.UUID,
                 defaultValue: DataTypes.UUIDV4,
-                onDelete: 'CASCADE',
-                onUpdate: 'CASCADE'
             },
-            email: {
-                type: DataTypes.STRING,
-                unique: true,
+            user_FK: {
                 allowNull: false,
+                type: DataTypes.UUID,
+                references: {
+                    model: 'Users',
+                    key: 'id',
+                },
             },
-            password: {
-                type: DataTypes.STRING,
+            post_FK: {
                 allowNull: false,
-            },
-            name: {
-                type: DataTypes.STRING,
-            },
-            salt: {
-                type: DataTypes.STRING,
+                type: DataTypes.UUID,
+                references: {
+                    model: 'Posts',
+                    key: 'id',
+                },
             },
             createdAt: {
                 allowNull: false,
@@ -51,8 +46,8 @@ module.exports = (sequelize, DataTypes) => {
         },
         {
             sequelize,
-            modelName: 'User',
+            modelName: 'userPost',
         }
     );
-    return User;
+    return userPost;
 };

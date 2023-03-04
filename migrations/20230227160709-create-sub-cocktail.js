@@ -8,6 +8,8 @@ module.exports = {
                 primaryKey: true,
                 type: Sequelize.UUID,
                 defaultValue: Sequelize.UUIDV4,
+                onDelete: 'CASCADE',
+                onUpdate: 'CASCADE'
             },
             cocktail_id: {
                 type: Sequelize.INTEGER,
@@ -28,7 +30,7 @@ module.exports = {
                 references: {
                     model: 'Categories',
                     key: 'id',
-                }
+                },
             },
             createdAt: {
                 allowNull: false,
