@@ -19,8 +19,7 @@ const getPosts = async (id) => {
 };
 const getPost = async (id) => {
     try {
-        const Post = await Post.findAll({ where: { id: id } });
-        return Post;
+        return Post.findByPk(id);
     } catch (error) {
         console.log('THIS IS THE ERROR, ' + error.message);
     }
@@ -48,5 +47,5 @@ module.exports = {
     getPosts,
     deletePost,
     getAllPosts,
-    getPost
+    getPost,
 };

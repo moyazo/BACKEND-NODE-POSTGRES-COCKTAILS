@@ -4,11 +4,11 @@ const {
     getPosts,
     deletePost,
     getAllPosts,
-    getPost
+    getPost,
 } = require('../controllers/post');
 const routerFeed = Router();
 
-routerFeed.post('/createPost', async (req, res) => {
+routerFeed.post('/', async (req, res) => {
     // CREATE POSTS
     try {
         if (!req.body) res.status(403).json('BODY EMPTY');
@@ -49,7 +49,7 @@ routerFeed.get('/:postId', async (req, res) => {
         res.status(500).json('No new documents found' + error.message);
     }
 });
-routerFeed.get('/all-posts', async (req, res) => {
+routerFeed.get('/', async (req, res) => {
     // POSTS DE USER
     try {
         const Posts = await getAllPosts();
