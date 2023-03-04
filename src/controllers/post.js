@@ -1,5 +1,11 @@
 const db = require('../models');
 const Post = db.Post;
+/**
+ * *createPost*
+ * *This function creates a new Post*
+ * @param {JSON} data
+ * @returns {Post}
+ */
 const createPost = async (data) => {
     try {
         const newPost = await Post.create(data);
@@ -8,6 +14,13 @@ const createPost = async (data) => {
         console.log('THIS IS THE ERROR, ' + error.message);
     }
 };
+/**
+ * *updatePost*
+ * *This function update the post depending on the id given and the data the front-end wants to modify*
+ * @param {String} id
+ * @param {JSON} data
+ * @returns {JSON}
+ */
 const updatePost = async (id, data) => {
     try {
         return Post.update(data, {
@@ -17,8 +30,13 @@ const updatePost = async (id, data) => {
         console.log('THIS IS THE ERROR, ' + error.message);
     }
 };
-
-const getPosts = async (id) => {
+/**
+ * *getPostsByUserId*
+ * *This function call to all the posts by user id from our DB*
+ * @param {String} id
+ * @returns {JSON}
+ */
+const getPostsByUserId = async (id) => {
     try {
         const Posts = await Post.findAll({ where: { user_FK: id } });
         return Posts;
@@ -26,6 +44,12 @@ const getPosts = async (id) => {
         console.log('THIS IS THE ERROR, ' + error.message);
     }
 };
+/**
+ * *getPost*
+ * *This function call to a the post by id from our DB*
+ * @param {String} id
+ * @returns {JSON}
+ */
 const getPost = async (id) => {
     try {
         return Post.findByPk(id);
@@ -33,6 +57,11 @@ const getPost = async (id) => {
         console.log('THIS IS THE ERROR, ' + error.message);
     }
 };
+/**
+ * *getAllPosts*
+ * *This function call to a all posts from our DB*
+ * @returns {JSON}
+ */
 const getAllPosts = async () => {
     try {
         const Posts = await Post.findAll();
@@ -41,7 +70,11 @@ const getAllPosts = async () => {
         console.log('THIS IS THE ERROR, ' + error.message);
     }
 };
-
+/**
+ * *deletePost*
+ * *This function delete a post by id from our DB*
+ * @returns {Boolean}
+ */
 const deletePost = async (id) => {
     try {
         const destroyed = await Post.destroy({ where: { post_id: id } });
@@ -53,7 +86,7 @@ const deletePost = async (id) => {
 
 module.exports = {
     createPost,
-    getPosts,
+    getPostsByUserId,
     deletePost,
     getAllPosts,
     getPost,

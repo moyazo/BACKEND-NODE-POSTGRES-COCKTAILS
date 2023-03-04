@@ -7,7 +7,7 @@ const Post = db.Post;
  * *getByCategory*
  * *This function call to all the subCocktails by id of a category from our DB*
  * @param {String} idCategory
- * @returns {subCocktail}
+ * @returns {JSON}
  */
 const getByCategory = async (idCategory) => {
     try {
