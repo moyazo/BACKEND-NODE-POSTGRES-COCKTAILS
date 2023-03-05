@@ -49,11 +49,11 @@ routerCategoryApi.get('/', async (req, res) => {
 routerCategoryApi.get('/type', async (req, res) => {
     try {
         const categories = await getCategories();
-        let type = categories.map(category => {
+        let type = categories.map((category) => {
             return {
                 id: category.id,
-                category: category.category
-            }     
+                category: category.category,
+            };
         });
         if (!type) {
             res.status(403).json('NOT CATEGORIES FOUND');

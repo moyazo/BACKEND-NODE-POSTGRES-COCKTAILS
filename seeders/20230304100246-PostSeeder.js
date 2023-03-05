@@ -2,15 +2,20 @@
 const uuid = require('uuid');
 const db = require('../src/models/index.js');
 const Category = db.Category;
+const User = db.User;
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
     async up(queryInterface, Sequelize) {
         let postToCreate = [];
         let categoriesToCreate = [];
+        let idCategories = [];
         const Categories = await Category.findAll();
+        const Users = await User.findAll();
         Categories.forEach((category) => {
-            categoriesToCreate.push(category);
+            categoriesToCreate.push(category.category);
+            idCategories.push(category.id);
         });
+        const usersId = Users.map((user) => user.id);
         const images = [
             'https://www.tastingtable.com/img/gallery/11-cocktails-to-try-if-you-like-drinking-gin/intro-1659025591.jpg',
             'https://thumbs.dreamstime.com/b/set-various-cocktails-black-background-set-various-cocktails-shaker-black-background-188649840.jpg',
@@ -27,10 +32,12 @@ module.exports = {
         for (var i = 0; i < 11; i++) {
             postToCreate.push({
                 id: uuid.v4(),
-                title: 'POST TEST' + (i + 1),
-                category: categoriesToCreate[i],
+                title: 'post test' + (i + 1),
+                postCategory: categoriesToCreate[i],
                 image: images[i],
                 comment: 'comment test',
+                user_FK: usersId[i],
+                category_FK: idCategories[i],
                 createdAt: new Date(),
                 updatedAt: new Date(),
             });

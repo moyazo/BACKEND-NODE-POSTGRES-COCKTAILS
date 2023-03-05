@@ -1,5 +1,6 @@
 const db = require('../models');
 const Post = db.Post;
+const subCocktail = db.subCocktail;
 /**
  * *createPost*
  * *This function creates a new Post*
