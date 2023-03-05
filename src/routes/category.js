@@ -46,4 +46,23 @@ routerCategoryApi.get('/', async (req, res) => {
     }
 });
 
+routerCategoryApi.get('/type', async (req, res) => {
+    try {
+        const categories = await getCategories();
+        let type = categories.map(category => {
+            return {
+                id: category.id,
+                category: category.category
+            }     
+        });
+        if (!type) {
+            res.status(403).json('NOT CATEGORIES FOUND');
+        }
+        res.status(200).json(type);
+    } catch (error) {
+        console.log(error);
+        res.status(500).json('No new documents found' + error.message);
+    }
+});
+
 module.exports = routerCategoryApi;
