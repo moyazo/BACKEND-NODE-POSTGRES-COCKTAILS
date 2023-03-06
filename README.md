@@ -41,4 +41,10 @@ Habiendo terminado lo anterior solo tendríamos que usar:
 yarn start
 ```
 
+Y justo después para correr las seeders:
+```bash
+yarn start
+```
+
+
 HAPPY HACKING!
