@@ -132,7 +132,7 @@ routerFeed.delete('/:postId', async (req, res) => {
     try {
         const postId = req.params.postId;
         const deleted = await deletePost(postId);
-        if (!Posts) {
+        if (!deleted) {
             res.status(500).json('ERROR 403, can not delete post');
         }
         res.status(200).json(deleted);
