@@ -43,7 +43,7 @@ yarn start
 
 Y justo después para correr las seeders:
 ```bash
-yarn start
+yarn sequelize-cli db:seed:all
 ```
 
 
