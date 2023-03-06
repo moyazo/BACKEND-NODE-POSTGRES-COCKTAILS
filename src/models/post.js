@@ -13,10 +13,6 @@ module.exports = (sequelize, DataTypes) => {
                 as: 'UserPosts',
                 foreignKey: 'post_FK',
             });
-            Post.hasOne(models.Category, {
-                foreignKey: 'id',
-                as: 'category',
-            });
         }
     }
     Post.init(
@@ -43,16 +39,6 @@ module.exports = (sequelize, DataTypes) => {
                 type: DataTypes.UUID,
                 references: {
                     model: 'Users',
-                    key: 'id',
-                },
-                onDelete: 'CASCADE',
-                onUpdate: 'CASCADE',
-            },
-            category_FK: {
-                allowNull: false,
-                type: DataTypes.UUID,
-                references: {
-                    model: 'Categories',
                     key: 'id',
                 },
                 onDelete: 'CASCADE',

@@ -78,7 +78,7 @@ const getAllPosts = async () => {
  */
 const deletePost = async (id) => {
     try {
-        const destroyed = await Post.destroy({ where: { post_id: id } });
+        const destroyed = await Post.destroy({ where: { id } });
         return destroyed;
     } catch (error) {
         console.log('THIS IS THE ERROR, ' + error.message);
