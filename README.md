@@ -21,7 +21,7 @@ git clone [LINK DEL REPOSITORIO]
 
 ```
 
-## Intalación
+## Inicialización
 
 Ya clonado el proyecto es necesario instalar todas las dependencias con el comando:
 
