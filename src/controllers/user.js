@@ -1,5 +1,7 @@
 const db = require('../models/index.js');
+const user = require('../models/user.js');
 const User = db.User;
+const Post = db.Post;
 
 const getUserId = async (id) => {
     const user = await User.findByPk(id);
@@ -21,67 +23,52 @@ const getUserByEmail = async (email) => {
     }
 };
 
-const updateUserFavListRover = async ({ userId, roverId }) => {
-    let user = await User.findByPk(userId, {
+const updateUserFavListPost = async ({ userId, postId }) => {
+    const user = await User.findByPk(userId, {
         attributes: { exclude: ['password', 'salt'] },
         include: {
-            model: db.rover,
-            as: 'roverFavorites',
+            model: db.Post,
+            as: 'postsFavorites',
         },
     });
-    // console.log('PREV', user)
-    let currentFavList = user.roverFavorites.map((item) => item.id) || [];
+    const currentFavList = user.postsFavorites.map((item) => item.id) || [];
 
-    const existed = currentFavList.includes(roverId);
+    const existed = currentFavList.includes(postId);
 
     let isAdded = false;
     if (!existed) {
-        const rover = await Rover.findByPk(roverId);
-        if (!rover) {
-            throw new Error('Rover not found');
+        console.log(postId)
+        const post = await Post.findByPk(postId);
+        if (!post) {
+            throw new Error('Post not found');
         }
-        user.addRoverFavorites(rover);
+        user.addPostsFavorites(post);
         isAdded = true;
     } else {
-        const newList = currentFavList.filter((item) => item !== roverId);
-        user.setRoverFavorites(newList);
+        const newList = currentFavList.filter((item) => item !== postId);
+        user.setPostsFavorites(newList);
     }
 
     return { user, isAdded };
 };
 
-const updateUserFavListApod = async ({ userId, apodId }) => {
-    let user = await User.findByPk(userId, {
-        attributes: { exclude: ['password', 'salt'] },
-        include: {
-            model: db.apod,
-            as: 'apodFavorites',
-        },
-    });
-    let currentFavList = user.apodFavorites.map((item) => item.id) || [];
 
-    const existed = currentFavList.includes(apodId);
-
-    let isAdded = false;
-    if (!existed) {
-        const apod = await Apod.findByPk(apodId);
-        // console.log(apod)
-        if (!apod) {
-            throw new Error('Apod not found');
-        }
-        user.addApodFavorites(apod);
-        isAdded = true;
-    } else {
-        const newList = currentFavList.filter((item) => item !== apodId);
-        user.setApodFavorites(newList);
+const getUserFavorites = async (userId) => {
+    try {
+        const user = await User.findByPk(userId,{include: {
+            attributes: { exclude: ['password', 'salt'] },
+            model: db.Post,
+            as: 'postsFavorites',
+        }});
+        return user.postsFavorites;
+    } catch (error) {
+        console.log('Error at bring user favorites' + error.message);
     }
-
-    return { user, isAdded };
-};
-
+    
+}
 module.exports = {
-    updateUserFavListRover,
     getUserByEmail,
     getUserId,
-    updateUserFavListApod,
+    updateUserFavListPost,
+    getUserFavorites
 };

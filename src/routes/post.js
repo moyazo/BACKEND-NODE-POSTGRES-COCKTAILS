@@ -21,7 +21,6 @@ routerFeed.post('/', async (req, res) => {
     try {
         if (!req.body) res.status(403).json('BODY EMPTY');
         const newData = req.body;
-        console.log({ newData });
         const Post = await createPost(newData);
         if (!Post) {
             res.status(403).json('ERROR 403, can not create new post');

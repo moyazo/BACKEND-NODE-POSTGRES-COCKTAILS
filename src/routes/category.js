@@ -1,10 +1,6 @@
 const Router = require('express').Router;
 const { apiCallByCategory } = require('../services/cocktailApi');
 const { getCategories } = require('../controllers/category');
-const {
-    getCocktailList,
-    getSubCocktailById,
-} = require('../controllers/subCocktail');
 const routerCategoryApi = Router();
 
 /**
@@ -13,15 +9,20 @@ const routerCategoryApi = Router();
  * *ENDPOINT* 'localhost:8000/categories/sync'
  * @param {Request} req
  * @param {Response} res
- * @returns {String}
+ * @returns {JSON}
  */
 routerCategoryApi.get('/sync', async (req, res) => {
     try {
-        await apiCallByCategory();
-        res.status(200).json('Data synchronize successfully');
+        const isSynchronized = await apiCallByCategory();
+        if (!isSynchronized) {
+            res.status(502).json('Can not synchronize Categories');
+        }
+        res.status(200).json('Categories synchronize successfully');
     } catch (error) {
         console.log(error);
-        res.status(500).json('No new documents found' + error.message);
+        res.status(500).json(
+            `Something went wrong at synchronize Categories ${error.message}`
+        );
     }
 });
 
@@ -41,15 +42,15 @@ routerCategoryApi.get('/', async (req, res) => {
         }
         res.status(200).json(categories);
     } catch (error) {
-        console.log(error);
-        res.status(500).json('No new documents found' + error.message);
+        res.status(500).json('Error at bring all categories' + error.message);
     }
 });
 
+// Esto solo trae el id de la categoría y el tipo. Esto os podría interesar pero si no borradlo
 routerCategoryApi.get('/type', async (req, res) => {
     try {
         const categories = await getCategories();
-        let type = categories.map((category) => {
+        const type = categories.map((category) => {
             return {
                 id: category.id,
                 category: category.category,

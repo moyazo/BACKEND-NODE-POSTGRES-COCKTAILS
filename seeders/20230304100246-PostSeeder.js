@@ -37,7 +37,6 @@ module.exports = {
                 image: images[i],
                 comment: 'comment test',
                 user_FK: usersId[i],
-                category_FK: idCategories[i],
                 createdAt: new Date(),
                 updatedAt: new Date(),
             });

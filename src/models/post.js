@@ -13,6 +13,11 @@ module.exports = (sequelize, DataTypes) => {
                 as: 'UserPosts',
                 foreignKey: 'post_FK',
             });
+            Post.belongsToMany(models.User, {
+                through: 'postUserFavorites',
+                as: 'postsFavorites',
+                foreignKey: 'post_favorite_FK',
+            });
         }
     }
     Post.init(

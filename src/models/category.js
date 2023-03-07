@@ -8,9 +8,6 @@ module.exports = (sequelize, DataTypes) => {
          * The `models/index` file will call this method automatically.
          */
         static associate(models) {
-            Category.hasMany(models.Cocktail, {
-                foreignKey: 'cocktail_category_FK',
-            });
             Category.hasMany(models.subCocktail, {
                 foreignKey: 'sub_cocktail_category_FK',
             });

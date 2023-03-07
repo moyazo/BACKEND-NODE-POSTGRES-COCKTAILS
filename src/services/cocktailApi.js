@@ -1,5 +1,4 @@
 const db = require('../models/index.js');
-const Cocktail = db.Cocktail;
 const subCocktail = db.subCocktail;
 const Category = db.Category;
 
@@ -34,8 +33,7 @@ async function apiCallRandom() {
         }));
         return ourRandom;
     } catch (error) {
-        console.log(error);
-        console.log('THIS IS THE ERROR' + error.message);
+        console.log('Error at sync Random' + error.message);
     }
 }
 
@@ -50,29 +48,30 @@ async function apiCallByCategory() {
             `https://www.thecocktaildb.com/api/json/v1/1/list.php?c=list`
         );
         const data = await response.json();
-        const newList = data.drinks.map((item) => ({
+        const categoriesResponse = data.drinks.map((item) => ({
             category: item.strCategory,
         }));
-        const categories = await Category.findAll();
-        console.log(categories);
-        const itemsToCreate = [];
+        const categoriesDB = await Category.findAll();
+        const categoriesToCreate = [];
 
-        for (let element of newList) {
-            const existed = categories.find(
-                (category) => category.category === element.category
+        for (let categoryResponse of categoriesResponse) {
+            const existed = categoriesDB.find(
+                (categoryDB) =>
+                    categoryDB.category === categoryResponse.category
             );
             if (!existed) {
-                itemsToCreate.push(element);
+                categoriesToCreate.push(categoryResponse);
             }
         }
 
-        if (itemsToCreate.length > 0) {
-            await Category.bulkCreate(itemsToCreate);
+        if (categoriesToCreate.length > 0) {
+            await Category.bulkCreate(categoriesToCreate);
         }
 
         await apiCallBySubCategory();
+        return true;
     } catch (error) {
-        console.log('THIS IS THE ERROR: ' + error.message);
+        return false;
     }
 }
 
@@ -99,8 +98,6 @@ async function apiCallBySubCategory() {
                 image: item.strDrinkThumb,
                 sub_cocktail_category_FK: categoryDb.dataValues.id,
             }));
-            console.log('hi' + categoryDb.dataValues.id);
-
             const itemsToCreate = [];
             for (let element of newList) {
                 const existed = subCocktails.find(
@@ -111,13 +108,12 @@ async function apiCallBySubCategory() {
                     itemsToCreate.push(element);
                 }
             }
-
             if (itemsToCreate.length > 0) {
                 await subCocktail.bulkCreate(itemsToCreate);
             }
         }
     } catch (error) {
-        console.log('THIS IS THE ERROR' + error.message);
+        console.log('Error at sync subCocktail' + error.message);
     }
 }
 
