@@ -8,12 +8,10 @@ module.exports = {
     async up(queryInterface, Sequelize) {
         let postToCreate = [];
         let categoriesToCreate = [];
-        let idCategories = [];
         const Categories = await Category.findAll();
         const Users = await User.findAll();
         Categories.forEach((category) => {
             categoriesToCreate.push(category.category);
-            idCategories.push(category.id);
         });
         const usersId = Users.map((user) => user.id);
         const images = [
