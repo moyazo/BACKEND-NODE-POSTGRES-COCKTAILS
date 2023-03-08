@@ -77,7 +77,7 @@ async function apiCallByCategory() {
 
 /**
  * *apiCallBySubCategory*
- * *This function call to ourr CATEGORIES table from the DB and each category have a list of cocktails that are save in our DB*
+ * *This function call to our CATEGORIES table from the DB and each category have a list of cocktails that are save in our DB*
  * *thanks to our api, this cocktails are save with the id of each category*
  * @returns {any}
  */
