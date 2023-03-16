@@ -42,9 +42,9 @@ yarn start
 ```
 
 Y justo después para correr las seeders:
+
 ```bash
 yarn sequelize-cli db:seed:all
 ```
-
 
 HAPPY HACKING!

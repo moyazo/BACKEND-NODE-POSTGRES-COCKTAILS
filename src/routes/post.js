@@ -110,9 +110,9 @@ routerFeed.get('/:postId', async (req, res) => {
 routerFeed.get('/', async (req, res) => {
     // POSTS DE USER
     try {
-        const Posts = await getAllPosts();
-        if (!Posts) res.status(403).json('POSTS EMPTY');
-        res.status(200).json(Posts);
+        const posts = await getAllPosts(req.user.id);
+        if (!posts) res.status(403).json('POSTS EMPTY');
+        res.status(200).json(posts);
     } catch (error) {
         console.log(error);
         res.status(500).json('No new documents found' + error.message);
@@ -128,16 +128,13 @@ routerFeed.get('/', async (req, res) => {
  */
 routerFeed.delete('/:postId', async (req, res) => {
     // POSTS DE USER
+    console.log('entramos');
     try {
         const postId = req.params.postId;
         const deleted = await deletePost(postId);
-        if (!deleted) {
-            res.status(500).json('ERROR 403, can not delete post');
-        }
         res.status(200).json(deleted);
     } catch (error) {
-        console.log(error);
-        res.status(500).json('No new documents found' + error.message);
+        res.status(500).json(error.message);
     }
 });
 

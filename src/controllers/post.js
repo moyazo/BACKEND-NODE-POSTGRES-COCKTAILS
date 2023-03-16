@@ -63,10 +63,25 @@ const getPost = async (id) => {
  * *This function call to a all posts from our DB*
  * @returns {JSON}
  */
-const getAllPosts = async () => {
+const getAllPosts = async (userId) => {
     try {
-        const Posts = await Post.findAll();
-        return Posts;
+        const posts = await Post.findAll();
+        if (userId) {
+            const postsIds = posts.map((post) => post.id);
+            const favoritesPosts = await db.postUserFavorites.findAll({
+                where: {
+                    post_favorite_FK: postsIds,
+                    user_favorites_FK: userId,
+                },
+            });
+            return posts.map((post) => {
+                const isFav = !!favoritesPosts.find(
+                    (item) => item.post_favorite_FK === post.id
+                );
+                return { ...post.dataValues, isFav };
+            });
+        }
+        return posts;
     } catch (error) {
         console.log('THIS IS THE ERROR, ' + error.message);
     }
@@ -77,12 +92,12 @@ const getAllPosts = async () => {
  * @returns {Boolean}
  */
 const deletePost = async (id) => {
-    try {
-        const destroyed = await Post.destroy({ where: { id } });
-        return destroyed;
-    } catch (error) {
-        console.log('THIS IS THE ERROR, ' + error.message);
+    const post = await Post.findOne({ where: { id } });
+    if (!post) {
+        throw new Error('Post not found');
     }
+    const destroyed = await Post.destroy({ where: { id } });
+    return destroyed;
 };
 
 module.exports = {

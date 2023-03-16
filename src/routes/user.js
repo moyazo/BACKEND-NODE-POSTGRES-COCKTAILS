@@ -1,13 +1,16 @@
 const Router = require('express').Router;
 const jsonwebtoken = require('jsonwebtoken');
-const { updateUserFavListPost,getUserFavorites } = require('../controllers/user.js');
+const {
+    updateUserFavListPost,
+    getUserFavorites,
+} = require('../controllers/user.js');
 const getUserByEmail = require('../controllers/user.js').getUserByEmail;
 const routerUser = Router();
 
-routerUser.post('/:postId', async (req, res) => {
+routerUser.post('/toggle-post-fav/', async (req, res) => {
     try {
-        const { postId } = req.params;
-        
+        const { postId } = req.body;
+
         const { user, isAdded } = await updateUserFavListPost({
             userId: req.user.id,
             postId,
@@ -28,12 +31,12 @@ routerUser.post('/:postId', async (req, res) => {
 
 routerUser.get('/favList/:userID', async (req, res) => {
     try {
-        const userId = req.params.userID
-        if(userId){
+        const userId = req.params.userID;
+        if (userId) {
             res.status(403).json('req.params.userID is empty');
         }
         const userFavorites = await getUserFavorites(userId);
-        if(userFavorites){
+        if (userFavorites) {
             res.status(403).json('userFavorites is empty');
         }
         res.status(200).json(userFavorites);
